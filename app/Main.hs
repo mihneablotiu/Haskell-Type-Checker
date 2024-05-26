@@ -1,10 +1,18 @@
-module Main (main) where
+{-# LANGUAGE OverloadedStrings #-}
 
-import Lib
+import Domain.Language.LanguageComponents
+import Data.Aeson (eitherDecode)
+import qualified Data.ByteString.Lazy as B
+import System.Environment (getArgs)
 
 main :: IO ()
-main = print $ listSum [1, 2, 3, 4, 5]
-
-listSum :: [Int] -> Int
-listSum [] = 0
-listSum (x:xs) = x + listSum xs
+main = do
+    args <- getArgs
+    case args of
+        [filePath] -> do
+            content <- B.readFile filePath
+            let program = eitherDecode content :: Either String Program
+            case program of
+                Left err -> putStrLn $ "Failed to parse program: " ++ err
+                Right prog -> print prog
+        _ -> putStrLn "Usage: program <path-to-file>"

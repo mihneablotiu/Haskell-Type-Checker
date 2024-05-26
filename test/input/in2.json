@@ -1,0 +1,73 @@
+[
+    {
+        "tag": "ClassDecl",
+        "declTypeClass": { "getTypeClass": "A" },
+        "declTypeVar": { "getTypeVar": "a" },
+        "declFuncSigs": [
+        {
+            "funcSigName": "f",
+            "funcSigType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TVar",
+                "typeVar": { "getTypeVar": "a" }
+            },
+            "toType": {
+                "tag": "TBool"
+            }
+            }
+        }
+        ]
+    },
+    {
+        "tag": "InstanceDecl",
+        "declTypeClass": { "getTypeClass": "A" },
+        "declType": {
+        "tag": "TVar",
+        "typeVar": { "getTypeVar": "Int" }
+        },
+        "declFuncDefs": [
+        {
+            "funcDefName": "f",
+            "funcDefBody": {
+            "tag": "ELam",
+            "lamArg": "x",
+            "lamBody": {
+                "tag": "EBool",
+                "boolValue": true
+            }
+            }
+        }
+        ]
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "foo",
+        "declFuncType": {
+        "tag": "TFun",
+        "fromType": {
+            "tag": "TVar",
+            "typeVar": { "getTypeVar": "Int" }
+        },
+        "toType": {
+            "tag": "TBool"
+        }
+        },
+        "declFuncBody": {
+        "tag": "ELam",
+        "lamArg": "x",
+        "lamBody": {
+            "tag": "EApp",
+            "appFunc": {
+            "tag": "EVar",
+            "varName": "f"
+            },
+            "appArg": {
+            "tag": "EVar",
+            "varName": "x"
+            }
+        }
+        }
+    }
+]
+  

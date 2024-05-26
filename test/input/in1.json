@@ -1,0 +1,43 @@
+[
+  {
+    "tag": "FuncDecl",
+    "declFuncName": "f",
+    "declFuncType": {
+      "tag": "TFun",
+      "fromType": {
+        "tag": "TVar",
+        "typeVar": { "getTypeVar": "a" }
+      },
+      "toType": {
+        "tag": "TVar",
+        "typeVar": { "getTypeVar": "a" }
+      }
+    },
+    "declFuncBody": {
+      "tag": "ELam",
+      "lamArg": "a",
+      "lamBody": {
+        "tag": "EVar",
+        "varName": "a"
+      }
+    }
+  },
+  {
+    "tag": "FuncDecl",
+    "declFuncName": "x",
+    "declFuncType": {
+      "tag": "TNum"
+    },
+    "declFuncBody": {
+      "tag": "EApp",
+      "appFunc": {
+        "tag": "EVar",
+        "varName": "f"
+      },
+      "appArg": {
+        "tag": "ENum",
+        "numValue": 5
+      }
+    }
+  }
+]
