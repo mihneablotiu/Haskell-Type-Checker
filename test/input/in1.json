@@ -6,11 +6,15 @@
       "tag": "TFun",
       "fromType": {
         "tag": "TVar",
-        "typeVar": { "getTypeVar": "a" }
+        "typeVar": {
+          "getTypeVar": "a"
+        }
       },
       "toType": {
         "tag": "TVar",
-        "typeVar": { "getTypeVar": "a" }
+        "typeVar": {
+          "getTypeVar": "a"
+        }
       }
     },
     "declFuncBody": {

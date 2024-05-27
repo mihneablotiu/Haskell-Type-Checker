@@ -46,5 +46,4 @@ data Decl
 
 instance FromJSON Decl
 
-newtype Program = Program [Decl] deriving (Show, Eq, Generic)
-instance FromJSON Program
+type Program = [Decl]

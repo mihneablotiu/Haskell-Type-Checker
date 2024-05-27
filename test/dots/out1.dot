@@ -1,0 +1,7 @@
+graph {
+    2 [label="DeclNode \"x\" TNum"];
+    1 [label="DeclNode \"f\" (TFun {fromType = TVar {typeVar = TypeVar {getTypeVar = \"a\"}}, toType = TVar {typeVar = TypeVar {getTypeVar = \"a\"}}})"];
+    0 [label=ScopeNode];
+    0 -- 2 [label=D];
+    0 -- 1 [label=D];
+}

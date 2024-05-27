@@ -1,0 +1,13 @@
+graph {
+    5 [label="DeclNode \"foo\" (TFun {fromType = TVar {typeVar = TypeVar {getTypeVar = \"Int\"}}, toType = TBool})"];
+    4 [label="DeclNode \"f\" TNum"];
+    3 [label="InstanceNode (TypeClass {getTypeClass = \"A\"}) (TVar {typeVar = TypeVar {getTypeVar = \"Int\"}})"];
+    2 [label="DeclNode \"f\" (TFun {fromType = TVar {typeVar = TypeVar {getTypeVar = \"a\"}}, toType = TBool})"];
+    1 [label="TypeClassNode (TypeClass {getTypeClass = \"A\"})"];
+    0 [label=ScopeNode];
+    0 -- 5 [label=D];
+    3 -- 4 [label=D];
+    0 -- 3 [label=I];
+    1 -- 2 [label=D];
+    0 -- 1 [label=TC];
+}
