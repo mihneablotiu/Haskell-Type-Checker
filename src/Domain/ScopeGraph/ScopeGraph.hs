@@ -1,33 +1,29 @@
 module Domain.ScopeGraph.ScopeGraph where
-
 import Domain.Language.LanguageComponents
-import Data.GraphViz
-import Data.GraphViz.Printing (renderDot)
-import Data.GraphViz.Types.Monadic
-import Data.Text.Lazy (unpack)
 
 data NodeInfo =
-    ScopeNode
+    ScopeNode String
     | DeclNode String Type
-    | TypeClassNode TypeClass
+    | TypeClassNode TypeClass TypeVar
     | InstanceNode TypeClass Type
-    deriving (Show)
 
-data Node = Node { label :: Int, nodeInfo :: NodeInfo } deriving (Show)
-data EdgeType = D | TC | I | P deriving (Show)
+instance Show NodeInfo where
+    show (ScopeNode desc) = desc
+    show (DeclNode name t) = name ++ ": " ++ show t
+    show (TypeClassNode (TypeClass tc) (TypeVar tv)) = tc ++ ": TCLASS(" ++ tv ++ ")"
+    show (InstanceNode (TypeClass tc) t) = show t ++ ": INST(" ++ tc ++ ")"
 
-data Edge = Edge 
-    { source :: Node,
-      destination :: Node,
-      edgeType :: EdgeType
-    } deriving (Show)
+data Node = Node { label :: Int, nodeInfo :: NodeInfo }
+instance Show Node where
+    show (Node nodeLabel info) = show nodeLabel ++ ": " ++ show info
 
-data ScopeGraph = ScopeGraph 
-    { nodes :: [Node],
-      edges :: [Edge],
-      nextLabel :: Int
-    } deriving (Show)
+data EdgeType = D | TC | I | P | Eq | U deriving (Show)
 
+data Edge = Edge { source :: Node, destination :: Node, edgeType :: EdgeType }
+instance Show Edge where
+    show (Edge from to et) = show (label from) ++ " -- " ++ show et ++ " --> " ++ show (label to)
+
+data ScopeGraph = ScopeGraph { nodes :: [Node], edges :: [Edge], nextLabel :: Int }
 
 emptyScopeGraph :: ScopeGraph
 emptyScopeGraph = ScopeGraph [] [] 0
@@ -43,9 +39,3 @@ addEdge :: Node -> Node -> EdgeType -> ScopeGraph -> ScopeGraph
 addEdge from to et sg = 
     let newEdge = Edge from to et
     in sg { edges = newEdge : edges sg }
-
-scopeGraphToDot :: ScopeGraph -> String
-scopeGraphToDot sg = unpack $ renderDot $ toDot $ do
-    graph' $ do
-        mapM_ (\(Node nid info) -> node (show nid) [toLabel (show info)]) (nodes sg)
-        mapM_ (\(Edge (Node from _) (Node to _) et) -> edge (show from) (show to) [toLabel (show et)]) (edges sg)

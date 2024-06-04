@@ -1,5 +1,4 @@
 {-# LANGUAGE DeriveGeneric #-}
-
 module Domain.Language.LanguageComponents where
 
 import Data.Aeson
@@ -17,9 +16,15 @@ data Type
     | TVar { typeVar :: TypeVar }
     | TFun { fromType :: Type, toType :: Type }
     | TConstraint { typeClass :: TypeClass, constrainedType :: Type }
-    deriving (Show, Eq, Generic)
-
+    deriving (Eq, Generic)
 instance FromJSON Type
+
+instance Show Type where
+    show TNum = "Int"
+    show TBool = "Bool"
+    show (TVar (TypeVar tv)) = tv
+    show (TFun from to) = "(" ++ show from ++ " -> " ++ show to ++ ")"
+    show (TConstraint (TypeClass tc) t) = tc ++ " " ++ show t
 
 data Expr
     = EVar { varName :: String }
@@ -29,13 +34,12 @@ data Expr
     | EApp { appFunc :: Expr, appArg :: Expr }
     | ELam { lamArg :: String, lamBody :: Expr }
     deriving (Show, Eq, Generic)
-
 instance FromJSON Expr
 
 data FuncSig = FuncSig { funcSigName :: String, funcSigType :: Type } deriving (Show, Eq, Generic)
 instance FromJSON FuncSig
 
-data FuncDef = FuncDef { funcDefName :: String, funcDefBody :: Expr } deriving (Show, Eq, Generic)
+data FuncDef = FuncDef { funcDefName :: String, funcDefType :: Type, funcDefBody :: Expr } deriving (Show, Eq, Generic)
 instance FromJSON FuncDef
 
 data Decl
@@ -43,7 +47,6 @@ data Decl
     | InstanceDecl { declTypeClass :: TypeClass, declType :: Type, declFuncDefs :: [FuncDef] }
     | FuncDecl { declFuncName :: String, declFuncType :: Type, declFuncBody :: Expr }
     deriving (Show, Eq, Generic)
-
 instance FromJSON Decl
 
 type Program = [Decl]

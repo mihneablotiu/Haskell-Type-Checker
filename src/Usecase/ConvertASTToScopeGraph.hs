@@ -5,40 +5,86 @@ import Domain.ScopeGraph.ScopeGraph
 
 -- Convert a Program to a ScopeGraph
 convertProgram :: Program -> ScopeGraph
-convertProgram prog = 
-    let (rootNode, initialGraph) = addNode ScopeNode emptyScopeGraph
-    in foldl (convertDecl rootNode) initialGraph prog
+convertProgram prog =
+    let (globalScope, initialGraph) = addNode (ScopeNode "Global Scope") emptyScopeGraph
+    in foldl (convertDecl globalScope) initialGraph prog
 
--- Convert a Decl to the ScopeGraph, updating the graph accordingly
 convertDecl :: Node -> ScopeGraph -> Decl -> ScopeGraph
-convertDecl parentNode sg decl = case decl of
-    ClassDecl tc _ funcSigs ->
-        let (classNode, sg1) = addNode (TypeClassNode tc) sg
-            sg2 = addEdge parentNode classNode TC sg1
-        in foldl (convertFuncSig classNode) sg2 funcSigs
+convertDecl parentScope sg (ClassDecl tc tv funcSigs) =
+    let (classNode, sg') = addNode (TypeClassNode tc tv) sg
+        sg'' = addEdge parentScope classNode TC sg'
+        (scopeNode, sg''') = addNode (ScopeNode "Class Scope") sg''
+        sg'''' = addEdge parentScope scopeNode P sg'''
+        sg''''' = addEdge classNode scopeNode Eq sg''''
+    in foldl (convertFuncSig scopeNode) sg''''' funcSigs
 
-    InstanceDecl tc t funcDefs ->
-        let (instanceNode, sg1) = addNode (InstanceNode tc t) sg
-            sg2 = addEdge parentNode instanceNode I sg1
-        in foldl (convertFuncDef instanceNode) sg2 funcDefs
+convertDecl parentScope sg (InstanceDecl tc t funcDefs) =
+    let (instanceNode, sg') = addNode (InstanceNode tc t) sg
+        sg'' = addEdge parentScope instanceNode I sg'
+        (scopeNode, sg''') = addNode (ScopeNode "Instance Scope") sg''
+        sg'''' = addEdge parentScope scopeNode P sg'''
+        sg''''' = addEdge instanceNode scopeNode Eq sg''''
+    in foldl (convertFuncDef scopeNode) sg''''' funcDefs
 
-    FuncDecl name t _ ->
-        let (funcNode, sg1) = addNode (DeclNode name t) sg
-            sg2 = addEdge parentNode funcNode D sg1
-        in sg2
+convertDecl parentScope sg (FuncDecl name t body) =
+    let (funcNode, sg') = addNode (DeclNode name t) sg
+        sg'' = addEdge parentScope funcNode D sg'
+    in convertExpr parentScope t sg'' body
 
--- Convert a FuncSig to the ScopeGraph, updating the graph accordingly
 convertFuncSig :: Node -> ScopeGraph -> FuncSig -> ScopeGraph
-convertFuncSig parentNode sg (FuncSig name t) =
-    let (sigNode, sg1) = addNode (DeclNode name t) sg
-    in addEdge parentNode sigNode D sg1
+convertFuncSig parentScope sg (FuncSig name t) =
+    let (funcNode, sg') = addNode (DeclNode name t) sg
+        sg'' = addEdge parentScope funcNode D sg'
+    in sg''
 
--- Convert a FuncDef to the ScopeGraph, updating the graph accordingly
 convertFuncDef :: Node -> ScopeGraph -> FuncDef -> ScopeGraph
-convertFuncDef parentNode sg (FuncDef name _) =
-    let (defNode, sg1) = addNode (DeclNode name (inferType name)) sg
-    in addEdge parentNode defNode D sg1
+convertFuncDef parentScope sg (FuncDef name t body) =
+    let (funcNode, sg') = addNode (DeclNode name t) sg
+        sg'' = addEdge parentScope funcNode D sg'
+        inputParams = extractInputParams t
+        sg''' = foldl (\s (arg, ty) -> let (argNode, s') = addNode (DeclNode arg ty) s in addEdge funcNode argNode D s') sg'' inputParams
+    in convertExpr parentScope t sg''' body
 
--- Infer the type of a function definition (placeholder)
-inferType :: String -> Type
-inferType _ = TNum -- Placeholder, should be replaced with actual type inference
+extractInputParams :: Type -> [(String, Type)]
+extractInputParams (TFun from to) = ("arg", from) : extractInputParams to
+extractInputParams _ = []
+
+convertExpr :: Node -> Type -> ScopeGraph -> Expr -> ScopeGraph
+convertExpr parentScope parentType sg (EVar name) =
+    let (varNode, sg') = addNode (DeclNode name parentType) sg
+        sg'' = addEdge parentScope varNode U sg'
+    in sg''
+
+convertExpr parentScope _ sg (ENum n) =
+    let (numNode, sg') = addNode (DeclNode (show n) TNum) sg
+        sg'' = addEdge parentScope numNode D sg'
+    in sg''
+
+convertExpr parentScope _ sg (EBool b) =
+    let (boolNode, sg') = addNode (DeclNode (show b) TBool) sg
+        sg'' = addEdge parentScope boolNode D sg'
+    in sg''
+
+convertExpr parentScope _ sg (EAdd left right) =
+    let sg' = convertExpr parentScope TNum sg left
+        sg'' = convertExpr parentScope TNum sg' right
+    in sg''
+
+convertExpr parentScope parentType sg (EApp func arg) =
+    let argType = case parentType of
+                    TFun _ to -> to
+                    _         -> TVar (TypeVar "unknown")
+        sg' = convertExpr parentScope (TFun argType parentType) sg func
+        sg'' = convertExpr parentScope argType sg' arg
+    in sg''
+
+convertExpr parentScope parentType sg (ELam arg body) =
+    let argType = case parentType of
+                    TFun from _ -> from
+                    _           -> TVar (TypeVar "unknown")
+        (lamNode, sg') = addNode (DeclNode arg argType) sg
+        sg'' = addEdge parentScope lamNode D sg'
+        (scopeNode, sg''') = addNode (ScopeNode "Lambda Scope") sg''
+        sg'''' = addEdge parentScope scopeNode P sg'''
+        sg''''' = addEdge lamNode scopeNode Eq sg''''
+    in convertExpr scopeNode parentType sg''''' body

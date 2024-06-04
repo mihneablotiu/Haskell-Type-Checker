@@ -1,13 +1,50 @@
 graph {
-    5 [label="DeclNode \"foo\" (TFun {fromType = TVar {typeVar = TypeVar {getTypeVar = \"Int\"}}, toType = TBool})"];
-    4 [label="DeclNode \"f\" TNum"];
-    3 [label="InstanceNode (TypeClass {getTypeClass = \"A\"}) (TVar {typeVar = TypeVar {getTypeVar = \"Int\"}})"];
-    2 [label="DeclNode \"f\" (TFun {fromType = TVar {typeVar = TypeVar {getTypeVar = \"a\"}}, toType = TBool})"];
-    1 [label="TypeClassNode (TypeClass {getTypeClass = \"A\"})"];
-    0 [label=ScopeNode];
-    0 -- 5 [label=D];
-    3 -- 4 [label=D];
-    0 -- 3 [label=I];
-    1 -- 2 [label=D];
+    15 [label="x: Bool"
+       ,shape=box];
+    14 [label="f: (Bool -> (Int -> Bool))"
+       ,shape=box];
+    13 [label="Lambda Scope"
+       ,shape=ellipse];
+    12 [label="x: Int",shape=box];
+    11 [label="foo: (Int -> Bool)"
+       ,shape=box];
+    10 [label="True: Bool"
+       ,shape=box];
+    9 [label="Lambda Scope"
+      ,shape=ellipse];
+    8 [label="x: Int",shape=box];
+    7 [label="arg: Int",shape=box];
+    6 [label="f: (Int -> Bool)"
+      ,shape=box];
+    5 [label="Instance Scope"
+      ,shape=ellipse];
+    4 [label="Int: INST(A)"
+      ,shape=box];
+    3 [label="f: (a -> Bool)"
+      ,shape=box];
+    2 [label="Class Scope"
+      ,shape=ellipse];
+    1 [label="A: TCLASS(a)"
+      ,shape=box];
+    0 [label="Global Scope"
+      ,shape=ellipse];
+    13 -- 15 [label=U];
+    13 -- 14 [label=U];
+    12 -- 13 [label=Eq];
+    0 -- 13 [label=P];
+    0 -- 12 [label=D];
+    0 -- 11 [label=D];
+    9 -- 10 [label=D];
+    8 -- 9 [label=Eq];
+    5 -- 9 [label=P];
+    5 -- 8 [label=D];
+    6 -- 7 [label=D];
+    5 -- 6 [label=D];
+    4 -- 5 [label=Eq];
+    0 -- 5 [label=P];
+    0 -- 4 [label=I];
+    2 -- 3 [label=D];
+    1 -- 2 [label=Eq];
+    0 -- 2 [label=P];
     0 -- 1 [label=TC];
 }

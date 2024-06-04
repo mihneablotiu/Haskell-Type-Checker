@@ -2,8 +2,8 @@
 
 import Ports.Driving.InputJSONFile
 import Usecase.ConvertASTToScopeGraph
-import Domain.ScopeGraph.ScopeGraph
 import System.Environment (getArgs)
+import Ports.Driven.OutputDOTGraph
 
 main :: IO ()
 main = do

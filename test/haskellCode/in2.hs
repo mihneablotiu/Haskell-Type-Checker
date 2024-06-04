@@ -6,4 +6,4 @@ instance A Int where
     f x = True
 
 foo :: Int -> Bool
-    foo x = f x
+foo x = f x
