@@ -64,14 +64,17 @@
         "lamBody": {
           "tag": "EApp",
           "appFunc": {
-            "tag": "EVar",
-            "varName": "mySum"
+            "tag": "EApp",
+            "appFunc": {
+              "tag": "EVar",
+              "varName": "mySum"
+            },
+            "appArg": {
+              "tag": "EVar",
+              "varName": "x"
+            }
           },
           "appArg": {
-            "tag": "EVar",
-            "varName": "x"
-          },
-          "appArg2": {
             "tag": "EVar",
             "varName": "y"
           }

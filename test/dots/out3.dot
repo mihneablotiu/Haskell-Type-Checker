@@ -1,64 +1,52 @@
 graph {
-    18 [label="x: unknown"
-       ,shape=box];
-    17 [label="mySum: unknown"
-       ,shape=box];
-    16 [label="app: (unknown -> unknown)"
-       ,shape=box];
-    15 [label="Lambda Scope"
+    15 [label=y,shape=box];
+    14 [label=x,shape=box];
+    13 [label=mySum,shape=box];
+    12 [label="y: Int",shape=box];
+    11 [label="y's Lambda Scope"
        ,shape=ellipse];
-    14 [label="lambda: (unknown -> unknown)"
-       ,shape=box];
-    13 [label="Lambda Scope"
-       ,shape=ellipse];
-    12 [label="lambda: (unknown -> unknown)"
-       ,shape=box];
-    11 [label="Function Scope"
-       ,shape=ellipse];
-    10 [label="sumTest: (Int -> (Int -> Int))"
-       ,shape=box];
-    9 [label="b: unknown"
-      ,shape=box];
-    8 [label="a: unknown"
-      ,shape=box];
-    7 [label="+: (Int -> (Int -> Int))"
-      ,shape=box];
-    6 [label="Lambda Scope"
+    10 [label="x: Int",shape=box];
+    9 [label="x's Lambda Scope"
       ,shape=ellipse];
-    5 [label="lambda: (unknown -> unknown)"
+    8 [label="sumTest: (Int -> (Int -> Int))"
       ,shape=box];
-    4 [label="Lambda Scope"
+    7 [label=b,shape=box];
+    6 [label=a,shape=box];
+    5 [label="b: Int",shape=box];
+    4 [label="b's Lambda Scope"
       ,shape=ellipse];
-    3 [label="lambda: (unknown -> unknown)"
-      ,shape=box];
-    2 [label="Function Scope"
+    3 [label="a: Int",shape=box];
+    2 [label="a's Lambda Scope"
       ,shape=ellipse];
     1 [label="mySum: (Int -> (Int -> Int))"
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    16 -- 18 [label=D];
-    16 -- 17 [label=D];
-    15 -- 16 [label=D];
-    14 -- 15 [label=Eq];
-    13 -- 15 [label=P];
-    13 -- 14 [label=D];
-    12 -- 13 [label=Eq];
-    11 -- 13 [label=P];
-    11 -- 12 [label=D];
-    10 -- 11 [label=Eq];
-    0 -- 11 [label=P];
-    0 -- 10 [label=D];
-    7 -- 9 [label=D];
-    7 -- 8 [label=D];
-    6 -- 7 [label=D];
-    5 -- 6 [label=Eq];
-    4 -- 6 [label=P];
-    4 -- 5 [label=D];
-    3 -- 4 [label=Eq];
-    2 -- 4 [label=P];
-    2 -- 3 [label=D];
-    1 -- 2 [label=Eq];
-    0 -- 2 [label=P];
-    0 -- 1 [label=D];
+    11 -- 15 [label=U,dir=back];
+    11 -- 14 [label=U,dir=back];
+    11 -- 13 [label=U,dir=back];
+    11 -- 12 [label=D
+             ,dir=forward
+             ,arrowhead=dot];
+    9 -- 11 [label=P,dir=back];
+    9 -- 10 [label=D
+            ,dir=forward
+            ,arrowhead=dot];
+    0 -- 9 [label=P,dir=back];
+    0 -- 8 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    4 -- 7 [label=U,dir=back];
+    4 -- 6 [label=U,dir=back];
+    4 -- 5 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    2 -- 4 [label=P,dir=back];
+    2 -- 3 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    0 -- 2 [label=P,dir=back];
+    0 -- 1 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
 }

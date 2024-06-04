@@ -1,36 +1,34 @@
 graph {
-    10 [label="5: Int"
-       ,shape=box];
-    9 [label="f: unknown"
-      ,shape=box];
-    8 [label="app: (unknown -> unknown)"
-      ,shape=box];
-    7 [label="Function Scope"
+    9 [label=x,shape=box];
+    8 [label=f,shape=box];
+    7 [label="x: Int",shape=box];
+    6 [label="x's Lambda Scope"
       ,shape=ellipse];
-    6 [label="x: Int",shape=box];
-    5 [label="a: unknown"
+    5 [label="foo: (Int -> Int)"
       ,shape=box];
-    4 [label="Lambda Scope"
-      ,shape=ellipse];
-    3 [label="lambda: (unknown -> unknown)"
-      ,shape=box];
-    2 [label="Function Scope"
+    4 [label=a,shape=box];
+    3 [label="a: a",shape=box];
+    2 [label="a's Lambda Scope"
       ,shape=ellipse];
     1 [label="f: (a -> a)"
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    8 -- 10 [label=D];
-    8 -- 9 [label=D];
-    7 -- 8 [label=D];
-    6 -- 7 [label=Eq];
-    0 -- 7 [label=P];
-    0 -- 6 [label=D];
-    4 -- 5 [label=D];
-    3 -- 4 [label=Eq];
-    2 -- 4 [label=P];
-    2 -- 3 [label=D];
-    1 -- 2 [label=Eq];
-    0 -- 2 [label=P];
-    0 -- 1 [label=D];
+    6 -- 9 [label=U,dir=back];
+    6 -- 8 [label=U,dir=back];
+    6 -- 7 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    0 -- 6 [label=P,dir=back];
+    0 -- 5 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    2 -- 4 [label=U,dir=back];
+    2 -- 3 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    0 -- 2 [label=P,dir=back];
+    0 -- 1 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
 }

@@ -28,19 +28,29 @@
   },
   {
     "tag": "FuncDecl",
-    "declFuncName": "x",
+    "declFuncName": "foo",
     "declFuncType": {
-      "tag": "TNum"
+      "tag": "TFun",
+      "fromType": {
+        "tag": "TNum"
+      },
+      "toType": {
+        "tag": "TNum"
+      }
     },
     "declFuncBody": {
-      "tag": "EApp",
-      "appFunc": {
-        "tag": "EVar",
-        "varName": "f"
-      },
-      "appArg": {
-        "tag": "ENum",
-        "numValue": 5
+      "tag": "ELam",
+      "lamArg": "x",
+      "lamBody": {
+        "tag": "EApp",
+        "appFunc": {
+          "tag": "EVar",
+          "varName": "f"
+        },
+        "appArg": {
+          "tag": "EVar",
+          "varName": "x"
+        }
       }
     }
   }

@@ -6,12 +6,14 @@ data NodeInfo =
     | DeclNode String Type
     | TypeClassNode TypeClass TypeVar
     | InstanceNode TypeClass Type
+    | UsageNode String
 
 instance Show NodeInfo where
     show (ScopeNode desc) = desc
     show (DeclNode name t) = name ++ ": " ++ show t
     show (TypeClassNode (TypeClass tc) (TypeVar tv)) = tc ++ ": TCLASS(" ++ tv ++ ")"
     show (InstanceNode (TypeClass tc) t) = show t ++ ": INST(" ++ tc ++ ")"
+    show (UsageNode name) = name
 
 data Node = Node { label :: Int, nodeInfo :: NodeInfo }
 instance Show Node where

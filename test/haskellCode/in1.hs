@@ -1,5 +1,5 @@
 f :: a -> a
 f a = a
 
-x :: Int
-x = f 5
+foo :: Int -> Int
+foo x = f x
