@@ -2,11 +2,16 @@ module Usecase.ConvertASTToScopeGraph where
 import Domain.Language.LanguageComponents
 import Domain.ScopeGraph.ScopeGraph
 
--- Convert a Program to a ScopeGraph
 convertProgram :: Program -> ScopeGraph
 convertProgram prog =
-    let (globalScope, initialScopeGraph) = addNode (ScopeNode "Global Scope") emptyScopeGraph
-    in foldl (convertDecl globalScope) initialScopeGraph prog
+    let (globalScope, initialGraph) = addNode (ScopeNode "Global Scope") emptyScopeGraph
+        (trueNode, sg1) = addNode (DeclNode "True" TBool) initialGraph
+        sg2 = addEdge globalScope trueNode D sg1
+        (falseNode, sg3) = addNode (DeclNode "False" TBool) sg2
+        sg4 = addEdge globalScope falseNode D sg3
+        (numNode, sg5) = addNode (DeclNode "Number" TNum) sg4
+        sg6 = addEdge globalScope numNode D sg5
+    in foldl (convertDecl globalScope) sg6 prog
 
 convertDecl :: Node -> ScopeGraph -> Decl -> ScopeGraph
 convertDecl parentScope scopeGraph (ClassDecl tc tv funcSigs) =

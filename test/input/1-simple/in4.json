@@ -1,0 +1,42 @@
+[
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "a",
+        "declFuncType": {
+            "tag": "TNum"
+        },
+        "declFuncBody": {
+            "tag": "ENum",
+            "numValue": 10
+        }
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "b",
+        "declFuncType": {
+            "tag": "TNum"
+        },
+        "declFuncBody": {
+            "tag": "ENum",
+            "numValue": 20
+        }
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "sumAB",
+        "declFuncType": {
+            "tag": "TNum"
+        },
+        "declFuncBody": {
+            "tag": "EAdd",
+            "addLeft": {
+                "tag": "EVar",
+                "varName": "a"
+            },
+            "addRight": {
+                "tag": "EVar",
+                "varName": "b"
+            }
+        }
+    }
+]

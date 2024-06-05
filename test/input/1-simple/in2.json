@@ -1,0 +1,23 @@
+[
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "identity",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TNum"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": "x",
+            "lamBody": {
+                "tag": "EVar",
+                "varName": "x"
+            }
+        }
+    }
+]

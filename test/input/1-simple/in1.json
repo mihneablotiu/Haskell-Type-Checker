@@ -1,0 +1,13 @@
+[
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "x",
+        "declFuncType": {
+            "tag": "TNum"
+        },
+        "declFuncBody": {
+            "tag": "ENum",
+            "numValue": 5
+        }
+    }
+]

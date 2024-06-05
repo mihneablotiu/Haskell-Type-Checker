@@ -1,34 +1,43 @@
 graph {
-    18 [label=y
+    22 [label=z
        ,shape=box
        ,style=dashed];
-    17 [label=x
+    21 [label=y
        ,shape=box
        ,style=dashed];
-    16 [label=mySum
+    20 [label=add
        ,shape=box
        ,style=dashed];
+    19 [label=x
+       ,shape=box
+       ,style=dashed];
+    18 [label=add
+       ,shape=box
+       ,style=dashed];
+    17 [label="z: Int",shape=box];
+    16 [label="z's Lambda Scope"
+       ,shape=ellipse];
     15 [label="y: Int",shape=box];
     14 [label="y's Lambda Scope"
        ,shape=ellipse];
     13 [label="x: Int",shape=box];
     12 [label="x's Lambda Scope"
        ,shape=ellipse];
-    11 [label="sumTest: (Int -> (Int -> Int))"
+    11 [label="sumThree: (Int -> (Int -> (Int -> Int)))"
        ,shape=box];
-    10 [label=b
+    10 [label=y
        ,shape=box
        ,style=dashed];
-    9 [label=a
+    9 [label=x
       ,shape=box
       ,style=dashed];
-    8 [label="b: Int",shape=box];
-    7 [label="b's Lambda Scope"
+    8 [label="y: Int",shape=box];
+    7 [label="y's Lambda Scope"
       ,shape=ellipse];
-    6 [label="a: Int",shape=box];
-    5 [label="a's Lambda Scope"
+    6 [label="x: Int",shape=box];
+    5 [label="x's Lambda Scope"
       ,shape=ellipse];
-    4 [label="mySum: (Int -> (Int -> Int))"
+    4 [label="add: (Int -> (Int -> Int))"
       ,shape=box];
     3 [label="Number: Int"
       ,shape=box];
@@ -38,9 +47,15 @@ graph {
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    14 -- 18 [label=U,dir=back];
-    14 -- 17 [label=U,dir=back];
-    14 -- 16 [label=U,dir=back];
+    16 -- 22 [label=U,dir=back];
+    16 -- 21 [label=U,dir=back];
+    16 -- 20 [label=U,dir=back];
+    16 -- 19 [label=U,dir=back];
+    16 -- 18 [label=U,dir=back];
+    16 -- 17 [label=D
+             ,dir=forward
+             ,arrowhead=dot];
+    14 -- 16 [label=P,dir=back];
     14 -- 15 [label=D
              ,dir=forward
              ,arrowhead=dot];

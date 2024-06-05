@@ -1,0 +1,109 @@
+[
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "add",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TFun",
+                "fromType": {
+                    "tag": "TNum"
+                },
+                "toType": {
+                    "tag": "TNum"
+                }
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": "x",
+            "lamBody": {
+                "tag": "ELam",
+                "lamArg": "y",
+                "lamBody": {
+                    "tag": "EAdd",
+                    "addLeft": {
+                        "tag": "EVar",
+                        "varName": "x"
+                    },
+                    "addRight": {
+                        "tag": "EVar",
+                        "varName": "y"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "sumThree",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TFun",
+                "fromType": {
+                    "tag": "TNum"
+                },
+                "toType": {
+                    "tag": "TFun",
+                    "fromType": {
+                        "tag": "TNum"
+                    },
+                    "toType": {
+                        "tag": "TNum"
+                    }
+                }
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": "x",
+            "lamBody": {
+                "tag": "ELam",
+                "lamArg": "y",
+                "lamBody": {
+                    "tag": "ELam",
+                    "lamArg": "z",
+                    "lamBody": {
+                        "tag": "EApp",
+                        "appFunc": {
+                            "tag": "EApp",
+                            "appFunc": {
+                                "tag": "EVar",
+                                "varName": "add"
+                            },
+                            "appArg": {
+                                "tag": "EVar",
+                                "varName": "x"
+                            }
+                        },
+                        "appArg": {
+                            "tag": "EApp",
+                            "appFunc": {
+                                "tag": "EApp",
+                                "appFunc": {
+                                    "tag": "EVar",
+                                    "varName": "add"
+                                },
+                                "appArg": {
+                                    "tag": "EVar",
+                                    "varName": "y"
+                                }
+                            },
+                            "appArg": {
+                                "tag": "EVar",
+                                "varName": "z"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+]
