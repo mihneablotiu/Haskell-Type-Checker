@@ -28,12 +28,12 @@
         }
     },
     {
-        "tag": "FuncDecl",
-        "declFuncName": "result",
-        "declFuncType": {
+        "tag": "ValueDecl",
+        "declValueName": "result",
+        "declValueType": {
             "tag": "TNum"
         },
-        "declFuncBody": {
+        "declValueBody": {
             "tag": "EApp",
             "appFunc": {
                 "tag": "EVar",

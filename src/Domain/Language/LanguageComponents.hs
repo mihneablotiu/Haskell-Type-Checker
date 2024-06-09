@@ -46,6 +46,7 @@ data Decl
     = ClassDecl { declTypeClass :: TypeClass, declTypeVar :: TypeVar, declFuncSigs :: [FuncSig] }
     | InstanceDecl { declTypeClass :: TypeClass, declType :: Type, declFuncDefs :: [FuncDef] }
     | FuncDecl { declFuncName :: String, declFuncType :: Type, declFuncBody :: Expr }
+    | ValueDecl { declValueName :: String, declValueType :: Type, declValueBody :: Expr }
     deriving (Show, Eq, Generic)
 instance FromJSON Decl
 

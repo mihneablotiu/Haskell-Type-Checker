@@ -1,3 +1,4 @@
+-- Multiple declarations of variables
 a :: Int
 a = 10
 

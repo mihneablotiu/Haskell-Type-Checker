@@ -6,7 +6,7 @@ data NodeInfo =
     | DeclNode String Type
     | TypeClassNode TypeClass TypeVar
     | InstanceNode TypeClass Type
-    | UsageNode String
+    | UsageNode String deriving (Eq)
 
 instance Show NodeInfo where
     show (ScopeNode desc) = desc
@@ -15,11 +15,11 @@ instance Show NodeInfo where
     show (InstanceNode (TypeClass tc) t) = show t ++ ": INST(" ++ tc ++ ")"
     show (UsageNode name) = name
 
-data Node = Node { label :: Int, nodeInfo :: NodeInfo }
+data Node = Node { label :: Int, nodeInfo :: NodeInfo } deriving (Eq)
 instance Show Node where
     show (Node nodeLabel info) = show nodeLabel ++ ": " ++ show info
 
-data EdgeType = D | TC | I | P | Eq | U deriving (Show)
+data EdgeType = D | TC | I | P | Eq | U deriving (Show, Eq)
 
 data Edge = Edge { source :: Node, destination :: Node, edgeType :: EdgeType }
 instance Show Edge where

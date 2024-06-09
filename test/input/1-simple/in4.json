@@ -1,33 +1,33 @@
 [
     {
-        "tag": "FuncDecl",
-        "declFuncName": "a",
-        "declFuncType": {
+        "tag": "ValueDecl",
+        "declValueName": "a",
+        "declValueType": {
             "tag": "TNum"
         },
-        "declFuncBody": {
+        "declValueBody": {
             "tag": "ENum",
             "numValue": 10
         }
     },
     {
-        "tag": "FuncDecl",
-        "declFuncName": "b",
-        "declFuncType": {
+        "tag": "ValueDecl",
+        "declValueName": "b",
+        "declValueType": {
             "tag": "TNum"
         },
-        "declFuncBody": {
+        "declValueBody": {
             "tag": "ENum",
             "numValue": 20
         }
     },
     {
-        "tag": "FuncDecl",
-        "declFuncName": "sumAB",
-        "declFuncType": {
+        "tag": "ValueDecl",
+        "declValueName": "sumAB",
+        "declValueType": {
             "tag": "TNum"
         },
-        "declFuncBody": {
+        "declValueBody": {
             "tag": "EAdd",
             "addLeft": {
                 "tag": "EVar",

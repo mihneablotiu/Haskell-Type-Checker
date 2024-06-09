@@ -1,4 +1,5 @@
 module Usecase.ConvertASTToScopeGraph where
+
 import Domain.Language.LanguageComponents
 import Domain.ScopeGraph.ScopeGraph
 
@@ -34,6 +35,11 @@ convertDecl parentScope scopeGraph (FuncDecl name t body) =
     let (funcNode, scopeGraphWithFuncNode) = addNode (DeclNode name t) scopeGraph
         scopeGraphWithFuncEdge = addEdge parentScope funcNode D scopeGraphWithFuncNode
     in convertExpr parentScope t scopeGraphWithFuncEdge body
+
+convertDecl parentScope scopeGraph (ValueDecl name t body) =
+    let (valueNode, scopeGraphWithValueNode) = addNode (DeclNode name t) scopeGraph
+        scopeGraphWithValueEdge = addEdge parentScope valueNode D scopeGraphWithValueNode
+    in convertExpr parentScope t scopeGraphWithValueEdge body
 
 convertFuncSig :: Node -> ScopeGraph -> FuncSig -> ScopeGraph
 convertFuncSig parentScope scopeGraph (FuncSig name t) =

@@ -1,11 +1,11 @@
 [
     {
-        "tag": "FuncDecl",
-        "declFuncName": "x",
-        "declFuncType": {
+        "tag": "ValueDecl",
+        "declValueName": "x",
+        "declValueType": {
             "tag": "TNum"
         },
-        "declFuncBody": {
+        "declValueBody": {
             "tag": "ENum",
             "numValue": 5
         }
