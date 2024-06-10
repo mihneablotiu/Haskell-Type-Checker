@@ -41,3 +41,8 @@ addEdge :: Node -> Node -> EdgeType -> ScopeGraph -> ScopeGraph
 addEdge from to et sg = 
     let newEdge = Edge from to et
     in sg { edges = newEdge : edges sg }
+
+extractUsageNodeInfos :: ScopeGraph -> [Node]
+extractUsageNodeInfos sg = filter (\n -> case nodeInfo n of 
+                                         UsageNode _ -> True 
+                                         _ -> False) (nodes sg)

@@ -10,4 +10,4 @@ loadProgram filePath = do
     let program = eitherDecode content :: Either String Program
     return $ case program of
         Left err -> Left $ "Failed to parse program: " ++ err
-        Right prog -> Right prog
+        _ -> program

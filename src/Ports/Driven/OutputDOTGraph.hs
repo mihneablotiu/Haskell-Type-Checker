@@ -8,8 +8,8 @@ import Data.Text.Lazy (unpack)
 import Data.GraphViz.Attributes.Complete
 
 -- Convert a ScopeGraph to DOT format
-scopeGraphToDot :: ScopeGraph -> String
-scopeGraphToDot sg = unpack $ renderDot $ toDot $ do
+scopeGraphToDot :: ScopeGraph -> IO ()
+scopeGraphToDot sg = putStrLn $ unpack $ renderDot $ toDot $ do
     graph' $ do
         mapM_ (\(Node nid info) -> node (show nid) (attributes info)) (nodes sg)
         mapM_ (\(Edge (Node from _) (Node to _) et) -> edgeDirection (show from) (show to) et) (edges sg)

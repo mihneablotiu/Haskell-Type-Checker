@@ -1,0 +1,1 @@
+[Right [5 -- U --> Global Scope],Right [increment -- U --> Global Scope],Right [1 -- U --> x's Lambda Scope],Right [x -- U --> x's Lambda Scope]]
