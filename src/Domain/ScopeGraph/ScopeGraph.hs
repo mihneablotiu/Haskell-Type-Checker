@@ -23,7 +23,7 @@ data EdgeType = D | TC | I | P | Eq | U deriving (Show, Eq)
 
 data Edge = Edge { source :: Node, destination :: Node, edgeType :: EdgeType }
 instance Show Edge where
-    show (Edge from to et) = show (label from) ++ " -- " ++ show et ++ " --> " ++ show (label to)
+    show (Edge from to et) = show (nodeInfo from) ++ " -- " ++ show et ++ " --> " ++ show (nodeInfo to)
 
 data ScopeGraph = ScopeGraph { nodes :: [Node], edges :: [Edge], nextLabel :: Int }
 

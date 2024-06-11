@@ -1,1 +1,1 @@
-[Right [b -- U --> Global Scope],Right [a -- U --> Global Scope],Right [20 -- U --> Global Scope],Right [10 -- U --> Global Scope]]
+[[[b --U--> Global Scope,Global Scope --D--> b: Int]],[[a --U--> Global Scope,Global Scope --D--> a: Int]],[[20 --U--> Global Scope,Global Scope --D--> Number: Int]],[[10 --U--> Global Scope,Global Scope --D--> Number: Int]]]

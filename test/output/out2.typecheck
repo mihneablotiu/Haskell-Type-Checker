@@ -1,1 +1,1 @@
-[Right [x -- U --> x's Lambda Scope],Right [f -- U --> x's Lambda Scope],Right [True -- U --> x's Lambda Scope]]
+[[[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]],[],[[True --U--> x's Lambda Scope,x's Lambda Scope --P--> Instance Scope,Instance Scope --P--> Global Scope,Global Scope --D--> True: Bool]]]

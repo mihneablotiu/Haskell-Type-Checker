@@ -2,12 +2,12 @@ module Domain.TypeCheck.Path where
 import Domain.ScopeGraph.ScopeGraph
 
 data PathComponent = PathComponent {
-    fromNode :: NodeInfo,
+    fromNode :: Node,
     edgeType :: EdgeType,
-    toNode :: NodeInfo
+    toNode :: Node
 } deriving (Eq)
 
 instance Show PathComponent where
-    show (PathComponent from et to) = show from ++ " -- " ++ show et ++ " --> " ++ show to
+    show (PathComponent from et to) = show (nodeInfo from) ++ " --" ++ show et ++ "--> " ++ show (nodeInfo to)
 
 type Path = [PathComponent]

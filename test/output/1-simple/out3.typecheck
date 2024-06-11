@@ -1,1 +1,1 @@
-[Right [5 -- U --> Global Scope],Right [increment -- U --> Global Scope],Right [1 -- U --> x's Lambda Scope],Right [x -- U --> x's Lambda Scope]]
+[[[5 --U--> Global Scope,Global Scope --D--> Number: Int]],[[increment --U--> Global Scope,Global Scope --D--> increment: (Int -> Int)]],[[1 --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --D--> Number: Int]],[[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]]]

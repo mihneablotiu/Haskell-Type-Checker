@@ -1,1 +1,1 @@
-[Right [x -- U --> x's Lambda Scope],Right [f -- U --> x's Lambda Scope],Right [a -- U --> a's Lambda Scope]]
+[[[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]],[[f --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --D--> f: (a -> a)]],[[a --U--> a's Lambda Scope,a's Lambda Scope --D--> a: a]]]
