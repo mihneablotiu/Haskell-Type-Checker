@@ -17,6 +17,6 @@ main = do
                 Right prog -> do
                     let scopeGraph = convertProgram prog
                     
-                    scopeGraphTypeCheck outputFilePath scopeGraph
+                    scopeGraphTypeCheck outputFilePath scopeGraph prog
                     scopeGraphToDot scopeGraph
         _ -> putStrLn "Usage: program <path-to-file>"

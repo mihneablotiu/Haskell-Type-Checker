@@ -1,8 +1,10 @@
 module Usecase.FindPath where
 import Domain.ScopeGraph.ScopeGraph
 import Domain.TypeCheck.SearchPattern
+import Domain.TypeCheck.TypeError
 import Domain.TypeCheck.Path
 import Data.Char (isDigit)
+import Data.List (sortOn)
 
 nodeNameMatches :: Node -> String -> Bool
 nodeNameMatches (Node _ (DeclNode "Number" _)) targetName = length targetName == length (filter id $ map isDigit targetName)
@@ -11,6 +13,7 @@ nodeNameMatches _ _ = False
 
 extractNodeName :: Node -> String
 extractNodeName (Node _ (UsageNode name)) = name
+extractNodeName (Node _ (DeclNode name _)) = name
 extractNodeName _ = error "Node does not have a name"
 
 dfs :: Node -> ScopeGraph -> SearchPattern -> Path -> [Path]
@@ -34,5 +37,19 @@ dfs node scopeGraph VarUsage currentPath =
                     ) possibleEdges
 dfs _ _ FuncCall _ = []
 
-findAllValidPaths :: Node -> ScopeGraph -> SearchPattern -> [Path]
-findAllValidPaths startNode scopeGraph pattern = dfs startNode scopeGraph pattern []
+findValidPath :: Node -> ScopeGraph -> SearchPattern -> Either TypeError Path
+findValidPath startNode scopeGraph pattern =
+    let paths = dfs startNode scopeGraph pattern []
+        numberOfPaths = length paths
+    in if numberOfPaths == 0
+         then Left $ NotInScope (extractNodeName startNode) (nodeInfo startNode)
+         else if numberOfPaths == 1
+                then Right $ head paths
+                else 
+                    let sortedPaths = sortOn length paths
+                        listOfPathsLengths = map length sortedPaths
+                        shortestPathLength = head listOfPathsLengths
+                        shortestPaths = takeWhile (\path -> length path == shortestPathLength) sortedPaths
+                    in if length shortestPaths == 1
+                          then Right $ head shortestPaths
+                          else Left $ MultipleDeclarations (extractNodeName startNode) (nodeInfo startNode)
