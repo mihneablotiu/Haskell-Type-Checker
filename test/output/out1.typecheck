@@ -1,3 +1,0 @@
-Type mismatch of "f": Expected (a -> Int), but got (a -> a)
-
-[a --U--> a's Lambda Scope,a's Lambda Scope --D--> a: a]

@@ -1,2 +1,2 @@
-isTrue :: Bool
-isTrue = True
+result :: Int
+result = 5 + 3

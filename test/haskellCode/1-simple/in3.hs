@@ -1,5 +1,5 @@
-increment :: Int -> Int
-increment x = x + 1
+identity :: Bool -> Bool
+identity x = x
 
-result :: Int
-result = increment 5
+result :: Bool
+result = identity True

@@ -1,8 +1,11 @@
 graph {
-    5 [label=True
+    6 [label=3
       ,shape=box
       ,style=dashed];
-    4 [label="isTrue: Bool"
+    5 [label=5
+      ,shape=box
+      ,style=dashed];
+    4 [label="result: Int"
       ,shape=box];
     3 [label="Number: Int"
       ,shape=box];
@@ -12,6 +15,7 @@ graph {
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
+    0 -- 6 [label=U,dir=back];
     0 -- 5 [label=U,dir=back];
     0 -- 4 [label=D
            ,dir=forward

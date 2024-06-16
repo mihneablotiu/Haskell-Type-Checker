@@ -1,2 +1,5 @@
+increment :: Int -> Int
+increment x = x + 1
+
 result :: Int
-result = 5 + 3
+result = increment 5

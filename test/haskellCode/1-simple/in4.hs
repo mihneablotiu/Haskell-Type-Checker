@@ -1,5 +1,8 @@
-identity :: Bool -> Bool
-identity x = x
+double :: Int -> Int
+double x = x + x
 
-result :: Bool
-result = identity True
+increment :: Int -> Int
+increment y = y + 1
+
+result :: Int
+result = double (increment 5)

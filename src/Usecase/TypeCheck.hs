@@ -1,4 +1,5 @@
 module Usecase.TypeCheck where
+
 import qualified Data.Map as Map
 import Domain.Language.LanguageComponents
 import Domain.ScopeGraph.ScopeGraph
@@ -48,87 +49,62 @@ typeCheckDecl scopeGraph (FuncDecl _ declaredType body) searchState =
 typeCheckDecl _ _ searchState = ([], [], searchState)
 
 typeCheckExpr :: ScopeGraph -> Type -> Expr -> SearchState -> ([TypeError], [Path], SearchState)
-typeCheckExpr scopeGraph wantedType (ENum value) searchState =
-    let (numberResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState VarUsage
-    in case numberResult of
-        Right path ->
-            if getTypeFromNode (toNode $ last path) == wantedType
-            then ([], [path], newState)
-            else ([Mismatch (show value) TNum (getTypeFromNode (toNode $ last path))], [], newState)
-        Left e -> ([e], [], newState)
+typeCheckExpr scopeGraph wantedType expr searchState = 
+    let (foundTypeResult, foundPaths, newState) = findType scopeGraph expr searchState
+    in case foundTypeResult of
+        Right foundType ->
+            if foundType == wantedType
+            then ([], foundPaths, newState)
+            else ([Mismatch (show expr) wantedType foundType], [], newState)
+        Left err -> ([err], [], newState)
 
-typeCheckExpr scopeGraph wantedType (EBool value) searchState =
+findType :: ScopeGraph -> Expr -> SearchState -> (Either TypeError Type, [Path], SearchState)
+findType scopeGraph (ENum value) searchState = 
+    let (numResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState VarUsage
+    in case numResult of
+        Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
+        Left err -> (Left err, [], newState)
+
+findType scopeGraph (EBool value) searchState = 
     let (boolResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState VarUsage
     in case boolResult of
-        Right path ->
-            if getTypeFromNode (toNode $ last path) == wantedType
-            then ([], [path], newState)
-            else ([Mismatch (show value) TBool (getTypeFromNode (toNode $ last path))], [], newState)
-        Left e -> ([e], [], newState)
+        Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
+        Left err -> (Left err, [], newState)
 
-typeCheckExpr scopeGraph wantedType (EVar name) searchState =
+findType scopeGraph (EVar name) searchState =
     let (varResult, newState) = checkGraphOccurrence scopeGraph name searchState VarUsage
     in case varResult of
-        Right path ->
-            if getTypeFromNode (toNode $ last path) == wantedType
-            then ([], [path], newState)
-            else ([Mismatch name wantedType (getTypeFromNode (toNode $ last path))], [], newState)
-        Left e -> ([e], [], newState)
+        Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
+        Left err -> (Left err, [], newState)
 
-typeCheckExpr scopeGraph wantedType (EAdd left right) searchState =
-    let (leftErrors, leftPaths, leftState) = typeCheckExpr scopeGraph wantedType left searchState
-        (rightErrors, rightPaths, rightState) = typeCheckExpr scopeGraph wantedType right leftState
-    in (leftErrors ++ rightErrors, leftPaths ++ rightPaths, rightState)
+findType scopeGraph (EAdd left right) searchState =
+    let (leftResult, leftPaths, leftState) = findType scopeGraph left searchState
+        (rightResult, rightPaths, rightState) = findType scopeGraph right leftState
+    in case (leftResult, rightResult) of
+        (Right TNum, Right TNum) -> (Right TNum, leftPaths ++ rightPaths, rightState)
+        (Right _, Right _) -> (Left (UnexpectedError "Addition of non-numeric types"), [], rightState)
+        (Left le, _) -> (Left le, [], leftState)
+        (_, Left re) -> (Left re, [], rightState)
 
-typeCheckExpr scopeGraph wantedType (ELam _ body) searchState =
-    let (bodyErrors, bodyPaths, bodyState) = typeCheckExpr scopeGraph (extractOutputType wantedType) body searchState
-    in (bodyErrors, bodyPaths, bodyState)
+findType scopeGraph (ELam (_, argType) body) searchState =
+    let (bodyResult, bodyPaths, bodyState) = findType scopeGraph body searchState
+    in case bodyResult of
+        Right bodyType -> (Right (TFun argType bodyType), bodyPaths, bodyState)
+        Left err -> (Left err, [], bodyState)
 
-typeCheckExpr scopeGraph wantedType (EApp func arg) searchState =
-    case (func, arg) of
-        (EVar funcName, EVar argName) -> checkFinalStateFunctions scopeGraph wantedType funcName argName searchState
-        (EVar funcName, ENum argValue) -> checkFinalStateFunctions scopeGraph wantedType funcName (show argValue) searchState
-        (EVar funcName, EBool argValue) -> checkFinalStateFunctions scopeGraph wantedType funcName (show argValue) searchState
-        (EVar _, EApp _ _) -> checkFinalStateFunctionButNotArgument scopeGraph wantedType func arg searchState
-        _ -> ([], [], searchState)
-
-checkFinalStateFunctionButNotArgument :: ScopeGraph -> Type -> Expr -> Expr -> SearchState -> ([TypeError], [Path], SearchState)
-checkFinalStateFunctionButNotArgument scopeGraph wantedType func arg searchState =
-    let (funcCheck, funcUpdatedState) = checkGraphOccurrence scopeGraph (funcName func) searchState VarUsage
-    in case funcCheck of
-        Right funcPath ->
-            let funcType = getTypeFromNode (toNode $ last funcPath)
-            in case funcType of
-                TFun inputType outputType ->
-                    let (argErrors, argPaths, argUpdatedState) = typeCheckExpr scopeGraph inputType arg funcUpdatedState
-                    in if null argErrors
-                        then if outputType == wantedType
-                            then ([], funcPath : argPaths, argUpdatedState)
-                            else ([Mismatch (funcName func) (TFun inputType wantedType) funcType], [], argUpdatedState)
-                        else (argErrors, [], argUpdatedState)
-                _ -> ([UnexpectedError $ "Expected a function type but got: " ++ show funcType], [], funcUpdatedState)
-        Left funcError -> ([funcError], [], funcUpdatedState)
-    where
-        funcName (EVar name) = name
-        funcName _ = undefined
-
-
-checkFinalStateFunctions :: ScopeGraph -> Type -> [Char] -> [Char] -> SearchState -> ([TypeError], [Path], SearchState)
-checkFinalStateFunctions scopeGraph wantedType funcName argName searchState =
-    let (funcCheck, funcUpdatedState) = checkGraphOccurrence scopeGraph funcName searchState VarUsage
-        (argCheck, argUpdatedState) = checkGraphOccurrence scopeGraph argName funcUpdatedState VarUsage
-    in case (funcCheck, argCheck) of
-            (Right funcPath, Right argPath) ->
-                let funcType = getTypeFromNode (toNode $ last funcPath)
-                    argType = getTypeFromNode (toNode $ last argPath)
-                in case funcType of
-                    TFun inputType outputType ->
-                        if inputType == argType && outputType == wantedType
-                        then ([], [funcPath, argPath], argUpdatedState)
-                        else ([Mismatch funcName (TFun inputType wantedType) funcType], [], argUpdatedState)
-                    _ -> ([UnexpectedError $ "Expected a function type but got: " ++ show funcType], [], argUpdatedState)
-            (Left funcError, _) -> ([funcError], [], argUpdatedState)
-            (_, Left argError) -> ([argError], [], argUpdatedState)
+findType scopeGraph (EApp func arg) searchState = 
+    let (funcResult, funcPaths, funcState) = findType scopeGraph func searchState
+        (argResult, argPaths, argState) = findType scopeGraph arg funcState
+    in case funcResult of
+        Right (TFun inputType outputType) ->
+            case argResult of
+                Right argType ->
+                    if inputType == argType
+                    then (Right outputType, funcPaths ++ argPaths, argState)
+                    else (Left (Mismatch (show arg) inputType argType), [], argState)
+                Left err -> (Left err, [], argState)
+        Right funcType -> (Left (UnexpectedError ("Expected function type, got " ++ show funcType)), [], funcState)
+        Left err -> (Left err, [], funcState)
 
 checkGraphOccurrence :: ScopeGraph -> String -> SearchState -> SearchPattern -> (Either TypeError Path, SearchState)
 checkGraphOccurrence scopeGraph name searchState searchPattern =

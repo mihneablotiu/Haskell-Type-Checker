@@ -1,5 +1,5 @@
-increment :: Int -> Int
-increment x = x + 1
+add :: Int -> Int -> Int
+add x y = x + y
 
 result :: Int
-result = increment True
+result = add 5

@@ -1,4 +1,8 @@
 No errors found
-[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Bool]
-[identity --U--> Global Scope,Global Scope --D--> identity: (Bool -> Bool)]
-[True --U--> Global Scope,Global Scope --D--> True: Bool]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[y --U--> y's Lambda Scope,y's Lambda Scope --D--> y: Int]
+[1 --U--> y's Lambda Scope,y's Lambda Scope --P--> Global Scope,Global Scope --D--> Number: Int]
+[double --U--> Global Scope,Global Scope --D--> double: (Int -> Int)]
+[increment --U--> Global Scope,Global Scope --D--> increment: (Int -> Int)]
+[5 --U--> Global Scope,Global Scope --D--> Number: Int]

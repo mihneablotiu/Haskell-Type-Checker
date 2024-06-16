@@ -1,19 +1,47 @@
 [
     {
+        "tag": "FuncDecl",
+        "declFuncName": "increment",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TNum"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": ["x", {"tag": "TNum"}],
+            "lamBody": {
+                "tag": "EAdd",
+                "addLeft": {
+                    "tag": "EVar",
+                    "varName": "x"
+                },
+                "addRight": {
+                    "tag": "ENum",
+                    "numValue": 1
+                }
+            }
+        }
+    },
+    {
         "tag": "ValueDecl",
         "declValueName": "result",
         "declValueType": {
             "tag": "TNum"
         },
         "declValueBody": {
-            "tag": "EAdd",
-            "addLeft": {
+            "tag": "EApp",
+            "appFunc": {
+                "tag": "EVar",
+                "varName": "increment"
+            },
+            "appArg": {
                 "tag": "ENum",
                 "numValue": 5
-            },
-            "addRight": {
-                "tag": "ENum",
-                "numValue": 3
             }
         }
     }

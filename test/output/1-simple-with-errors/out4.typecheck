@@ -1,3 +1,6 @@
-Type mismatch of "identity": Expected (Bool -> Int), but got (Bool -> Bool)
+Type mismatch of "True": Expected Int, but got Bool
 
-[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Bool]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[y --U--> y's Lambda Scope,y's Lambda Scope --D--> y: Int]
+[1 --U--> y's Lambda Scope,y's Lambda Scope --P--> Global Scope,Global Scope --D--> Number: Int]

@@ -1,5 +1,5 @@
-isTrue :: Bool
-isTrue = True
+addTwo :: Int -> Int
+addTwo x = x + 2
 
-isTrue :: Int
-isTrue = 5
+result :: Int
+result = addTwo True

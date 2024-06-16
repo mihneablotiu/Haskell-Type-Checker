@@ -1,8 +1,5 @@
-double :: Int -> Int
-double x = x + x
-
-increment :: Int -> Int
-increment y = y + 1
+boolToInt :: Bool -> Int
+boolToInt x = 1
 
 result :: Int
-result = double (increment False)
+result = boolToInt 7

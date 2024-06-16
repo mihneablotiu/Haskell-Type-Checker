@@ -1,13 +1,20 @@
 [
     {
         "tag": "ValueDecl",
-        "declValueName": "isTrue",
+        "declValueName": "result",
         "declValueType": {
-            "tag": "TBool"
+            "tag": "TNum"
         },
         "declValueBody": {
-            "tag": "EBool",
-            "boolValue": true
+            "tag": "EAdd",
+            "addLeft": {
+                "tag": "ENum",
+                "numValue": 5
+            },
+            "addRight": {
+                "tag": "ENum",
+                "numValue": 3
+            }
         }
     }
 ]

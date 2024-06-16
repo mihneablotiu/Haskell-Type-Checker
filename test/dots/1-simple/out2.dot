@@ -1,11 +1,22 @@
 graph {
-    6 [label=3
+    11 [label=5
+       ,shape=box
+       ,style=dashed];
+    10 [label=increment
+       ,shape=box
+       ,style=dashed];
+    9 [label="result: Int"
+      ,shape=box];
+    8 [label=1
       ,shape=box
       ,style=dashed];
-    5 [label=5
+    7 [label=x
       ,shape=box
       ,style=dashed];
-    4 [label="result: Int"
+    6 [label="x: Int",shape=box];
+    5 [label="x's Lambda Scope"
+      ,shape=ellipse];
+    4 [label="increment: (Int -> Int)"
       ,shape=box];
     3 [label="Number: Int"
       ,shape=box];
@@ -15,8 +26,17 @@ graph {
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    0 -- 6 [label=U,dir=back];
-    0 -- 5 [label=U,dir=back];
+    0 -- 11 [label=U,dir=back];
+    0 -- 10 [label=U,dir=back];
+    0 -- 9 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    5 -- 8 [label=U,dir=back];
+    5 -- 7 [label=U,dir=back];
+    5 -- 6 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    0 -- 5 [label=P,dir=back];
     0 -- 4 [label=D
            ,dir=forward
            ,arrowhead=dot];

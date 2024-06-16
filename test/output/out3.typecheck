@@ -1,3 +1,0 @@
-No errors found
-[a --U--> b's Lambda Scope,b's Lambda Scope --P--> a's Lambda Scope,a's Lambda Scope --D--> a: Int]
-[b --U--> b's Lambda Scope,b's Lambda Scope --D--> b: Int]

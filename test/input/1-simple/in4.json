@@ -1,22 +1,57 @@
 [
     {
         "tag": "FuncDecl",
-        "declFuncName": "identity",
+        "declFuncName": "double",
         "declFuncType": {
             "tag": "TFun",
             "fromType": {
-                "tag": "TBool"
+                "tag": "TNum"
             },
             "toType": {
-                "tag": "TBool"
+                "tag": "TNum"
             }
         },
         "declFuncBody": {
             "tag": "ELam",
-            "lamArg": "x",
+            "lamArg": ["x", {"tag": "TNum"}],
             "lamBody": {
-                "tag": "EVar",
-                "varName": "x"
+                "tag": "EAdd",
+                "addLeft": {
+                    "tag": "EVar",
+                    "varName": "x"
+                },
+                "addRight": {
+                    "tag": "EVar",
+                    "varName": "x"
+                }
+            }
+        }
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "increment",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TNum"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": ["y", {"tag": "TNum"}],
+            "lamBody": {
+                "tag": "EAdd",
+                "addLeft": {
+                    "tag": "EVar",
+                    "varName": "y"
+                },
+                "addRight": {
+                    "tag": "ENum",
+                    "numValue": 1
+                }
             }
         }
     },
@@ -24,17 +59,24 @@
         "tag": "ValueDecl",
         "declValueName": "result",
         "declValueType": {
-            "tag": "TBool"
+            "tag": "TNum"
         },
         "declValueBody": {
             "tag": "EApp",
             "appFunc": {
                 "tag": "EVar",
-                "varName": "identity"
+                "varName": "double"
             },
             "appArg": {
-                "tag": "EBool",
-                "boolValue": true
+                "tag": "EApp",
+                "appFunc": {
+                    "tag": "EVar",
+                    "varName": "increment"
+                },
+                "appArg": {
+                    "tag": "ENum",
+                    "numValue": 5
+                }
             }
         }
     }
