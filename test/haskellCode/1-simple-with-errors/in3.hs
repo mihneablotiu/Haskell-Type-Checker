@@ -1,0 +1,5 @@
+increment :: Int -> Int
+increment x = x + 1
+
+result :: Int
+result = increment True

@@ -1,0 +1,4 @@
+No errors found
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Bool]
+[identity --U--> Global Scope,Global Scope --D--> identity: (Bool -> Bool)]
+[True --U--> Global Scope,Global Scope --D--> True: Bool]

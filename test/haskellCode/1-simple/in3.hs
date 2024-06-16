@@ -1,4 +1,3 @@
--- Function declaration and application
 increment :: Int -> Int
 increment x = x + 1
 

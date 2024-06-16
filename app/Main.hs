@@ -2,7 +2,7 @@
 
 import System.Environment (getArgs)
 import Ports.Driving.InputJSONFile
-import Usecase.ConvertASTToScopeGraph
+import Usecase.ConvertProgramToScopeGraph
 import Ports.Driven.OutputDOTGraph
 import Ports.Driven.OutputTypeCheckResult
 
@@ -17,6 +17,6 @@ main = do
                 Right prog -> do
                     let scopeGraph = convertProgram prog
                     
-                    scopeGraphTypeCheck outputFilePath scopeGraph prog
                     scopeGraphToDot scopeGraph
+                    scopeGraphTypeCheck outputFilePath scopeGraph prog
         _ -> putStrLn "Usage: program <path-to-file>"

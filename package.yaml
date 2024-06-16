@@ -25,6 +25,7 @@ dependencies:
 - aeson
 - bytestring
 - graphviz
+- containers
 
 ghc-options:
 - -Wall

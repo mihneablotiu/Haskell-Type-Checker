@@ -1,22 +1,19 @@
 [
     {
-        "tag": "FuncDecl",
-        "declFuncName": "identity",
-        "declFuncType": {
-            "tag": "TFun",
-            "fromType": {
-                "tag": "TNum"
-            },
-            "toType": {
-                "tag": "TNum"
-            }
+        "tag": "ValueDecl",
+        "declValueName": "result",
+        "declValueType": {
+            "tag": "TNum"
         },
-        "declFuncBody": {
-            "tag": "ELam",
-            "lamArg": "x",
-            "lamBody": {
-                "tag": "EVar",
-                "varName": "x"
+        "declValueBody": {
+            "tag": "EAdd",
+            "addLeft": {
+                "tag": "ENum",
+                "numValue": 5
+            },
+            "addRight": {
+                "tag": "ENum",
+                "numValue": 3
             }
         }
     }

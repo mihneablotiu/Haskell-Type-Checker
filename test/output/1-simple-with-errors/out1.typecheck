@@ -1,0 +1,3 @@
+Type mismatch of "True": Expected Bool, but got Bool
+
+[5 --U--> Global Scope,Global Scope --D--> Number: Int]

@@ -1,3 +1,2 @@
--- Variable declaration
-x :: Int
-x = 5
+isTrue :: Bool
+isTrue = True

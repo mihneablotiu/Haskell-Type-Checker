@@ -5,4 +5,4 @@ import Usecase.TypeCheck (typeCheckProgram)
 
 scopeGraphTypeCheck :: FilePath -> ScopeGraph -> Program -> IO ()
 scopeGraphTypeCheck outputFilePath scopeGraph program =
-    writeFile outputFilePath $ show $ typeCheckProgram program scopeGraph
+    writeFile outputFilePath $ show $ typeCheckProgram program scopeGraph 

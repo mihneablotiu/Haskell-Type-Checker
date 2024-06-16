@@ -1,0 +1,4 @@
+Type mismatch of "increment": Expected (Int -> Int), but got (Int -> Int)
+
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[1 --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --D--> Number: Int]

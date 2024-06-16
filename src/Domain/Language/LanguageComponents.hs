@@ -51,3 +51,11 @@ data Decl
 instance FromJSON Decl
 
 type Program = [Decl]
+
+extractInputType :: Type -> Type
+extractInputType (TFun from _) = from
+extractInputType _ = error "Type is not a function"
+
+extractOutputType :: Type -> Type
+extractOutputType (TFun _ to) = to
+extractOutputType _ = error "Type is not a function"

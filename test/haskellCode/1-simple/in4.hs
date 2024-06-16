@@ -1,9 +1,5 @@
--- Multiple declarations of variables
-a :: Int
-a = 10
+identity :: Bool -> Bool
+identity x = x
 
-b :: Int
-b = 20
-
-sumAB :: Int
-sumAB = a + b
+result :: Bool
+result = identity True

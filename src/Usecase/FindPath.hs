@@ -3,18 +3,7 @@ import Domain.ScopeGraph.ScopeGraph
 import Domain.TypeCheck.SearchPattern
 import Domain.TypeCheck.TypeError
 import Domain.TypeCheck.Path
-import Data.Char (isDigit)
 import Data.List (sortOn)
-
-nodeNameMatches :: Node -> String -> Bool
-nodeNameMatches (Node _ (DeclNode "Number" _)) targetName = length targetName == length (filter id $ map isDigit targetName)
-nodeNameMatches (Node _ (DeclNode name _)) targetName = name == targetName
-nodeNameMatches _ _ = False
-
-extractNodeName :: Node -> String
-extractNodeName (Node _ (UsageNode name)) = name
-extractNodeName (Node _ (DeclNode name _)) = name
-extractNodeName _ = error "Node does not have a name"
 
 dfs :: Node -> ScopeGraph -> SearchPattern -> Path -> [Path]
 dfs node scopeGraph VarUsage currentPath =
@@ -29,7 +18,7 @@ dfs node scopeGraph VarUsage currentPath =
         in concatMap (\(Edge src dest et) ->
                             let newComponent = if et == D then PathComponent src et dest else PathComponent dest et src
                                 newPath = currentPath ++ [newComponent]
-                            in if et == D && nodeNameMatches dest (extractNodeName node)
+                            in if et == D && declNodeNameMatches dest (extractNodeName node)
                                then [newPath]
                                else if et == D
                                     then []

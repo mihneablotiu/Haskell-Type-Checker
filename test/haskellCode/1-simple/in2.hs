@@ -1,3 +1,2 @@
--- Function declaration
-identity :: Int -> Int
-identity x = x
+result :: Int
+result = 5 + 3

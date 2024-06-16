@@ -1,0 +1,41 @@
+[
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "identity",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TBool"
+            },
+            "toType": {
+                "tag": "TBool"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": "x",
+            "lamBody": {
+                "tag": "EVar",
+                "varName": "x"
+            }
+        }
+    },
+    {
+        "tag": "ValueDecl",
+        "declValueName": "result",
+        "declValueType": {
+            "tag": "TNum"
+        },
+        "declValueBody": {
+            "tag": "EApp",
+            "appFunc": {
+                "tag": "EVar",
+                "varName": "identity"
+            },
+            "appArg": {
+                "tag": "EBool",
+                "boolValue": true
+            }
+        }
+    }
+]

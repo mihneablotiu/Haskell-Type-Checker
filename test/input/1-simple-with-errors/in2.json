@@ -1,0 +1,24 @@
+[
+    {
+        "tag": "ValueDecl",
+        "declValueName": "isTrue",
+        "declValueType": {
+            "tag": "TBool"
+        },
+        "declValueBody": {
+            "tag": "EBool",
+            "boolValue": true
+        }
+    },
+    {
+        "tag": "ValueDecl",
+        "declValueName": "isTrue",
+        "declValueType": {
+            "tag": "TNum"
+        },
+        "declValueBody": {
+            "tag": "ENum",
+            "numValue": 5
+        }
+    }
+]

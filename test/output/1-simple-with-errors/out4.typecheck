@@ -1,0 +1,3 @@
+Type mismatch of "identity": Expected (Bool -> Int), but got (Bool -> Bool)
+
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Bool]

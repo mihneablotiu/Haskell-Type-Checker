@@ -1,4 +1,4 @@
-module Usecase.ConvertASTToScopeGraph where
+module Usecase.ConvertProgramToScopeGraph where
 
 import Domain.Language.LanguageComponents
 import Domain.ScopeGraph.ScopeGraph

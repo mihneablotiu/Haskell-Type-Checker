@@ -1,107 +1,81 @@
 [
     {
         "tag": "FuncDecl",
-        "declFuncName": "add",
+        "declFuncName": "double",
         "declFuncType": {
             "tag": "TFun",
             "fromType": {
                 "tag": "TNum"
             },
             "toType": {
-                "tag": "TFun",
-                "fromType": {
-                    "tag": "TNum"
-                },
-                "toType": {
-                    "tag": "TNum"
-                }
+                "tag": "TNum"
             }
         },
         "declFuncBody": {
             "tag": "ELam",
             "lamArg": "x",
             "lamBody": {
-                "tag": "ELam",
-                "lamArg": "y",
-                "lamBody": {
-                    "tag": "EAdd",
-                    "addLeft": {
-                        "tag": "EVar",
-                        "varName": "x"
-                    },
-                    "addRight": {
-                        "tag": "EVar",
-                        "varName": "y"
-                    }
+                "tag": "EAdd",
+                "addLeft": {
+                    "tag": "EVar",
+                    "varName": "x"
+                },
+                "addRight": {
+                    "tag": "EVar",
+                    "varName": "x"
                 }
             }
         }
     },
     {
         "tag": "FuncDecl",
-        "declFuncName": "sumThree",
+        "declFuncName": "increment",
         "declFuncType": {
             "tag": "TFun",
             "fromType": {
                 "tag": "TNum"
             },
             "toType": {
-                "tag": "TFun",
-                "fromType": {
-                    "tag": "TNum"
-                },
-                "toType": {
-                    "tag": "TFun",
-                    "fromType": {
-                        "tag": "TNum"
-                    },
-                    "toType": {
-                        "tag": "TNum"
-                    }
-                }
+                "tag": "TNum"
             }
         },
         "declFuncBody": {
             "tag": "ELam",
-            "lamArg": "x",
+            "lamArg": "y",
             "lamBody": {
-                "tag": "ELam",
-                "lamArg": "y",
-                "lamBody": {
-                    "tag": "ELam",
-                    "lamArg": "z",
-                    "lamBody": {
-                        "tag": "EApp",
-                        "appFunc": {
-                            "tag": "EApp",
-                            "appFunc": {
-                                "tag": "EVar",
-                                "varName": "add"
-                            },
-                            "appArg": {
-                                "tag": "EVar",
-                                "varName": "x"
-                            }
-                        },
-                        "appArg": {
-                            "tag": "EApp",
-                            "appFunc": {
-                                "tag": "EApp",
-                                "appFunc": {
-                                    "tag": "EVar",
-                                    "varName": "add"
-                                },
-                                "appArg": {
-                                    "tag": "EVar",
-                                    "varName": "y"
-                                }
-                            },
-                            "appArg": {
-                                "tag": "EVar",
-                                "varName": "z"
-                            }
-                        }
-                    }
+                "tag": "EAdd",
+                "addLeft": {
+                    "tag": "EVar",
+                    "varName": "y"
+                },
+                "addRight": {
+                    "tag": "ENum",
+                    "numValue": 1
+                }
+            }
+        }
+    },
+    {
+        "tag": "ValueDecl",
+        "declValueName": "result",
+        "declValueType": {
+            "tag": "TNum"
+        },
+        "declValueBody": {
+            "tag": "EApp",
+            "appFunc": {
+                "tag": "EVar",
+                "varName": "double"
+            },
+            "appArg": {
+                "tag": "EApp",
+                "appFunc": {
+                    "tag": "EVar",
+                    "varName": "increment"
+                },
+                "appArg": {
+                    "tag": "ENum",
+                    "numValue": 5
                 }
             }
         }

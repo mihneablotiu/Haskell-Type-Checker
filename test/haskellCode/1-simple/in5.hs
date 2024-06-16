@@ -1,6 +1,8 @@
--- Multiple function applications
-add :: Int -> Int -> Int
-add x y = x + y
+double :: Int -> Int
+double x = x + x
 
-sumThree :: Int -> Int -> Int -> Int
-sumThree x y z = add x (add y z)
+increment :: Int -> Int
+increment y = y + 1
+
+result :: Int
+result = double (increment 5)

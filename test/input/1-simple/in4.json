@@ -1,41 +1,40 @@
 [
     {
-        "tag": "ValueDecl",
-        "declValueName": "a",
-        "declValueType": {
-            "tag": "TNum"
-        },
-        "declValueBody": {
-            "tag": "ENum",
-            "numValue": 10
-        }
-    },
-    {
-        "tag": "ValueDecl",
-        "declValueName": "b",
-        "declValueType": {
-            "tag": "TNum"
-        },
-        "declValueBody": {
-            "tag": "ENum",
-            "numValue": 20
-        }
-    },
-    {
-        "tag": "ValueDecl",
-        "declValueName": "sumAB",
-        "declValueType": {
-            "tag": "TNum"
-        },
-        "declValueBody": {
-            "tag": "EAdd",
-            "addLeft": {
-                "tag": "EVar",
-                "varName": "a"
+        "tag": "FuncDecl",
+        "declFuncName": "identity",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TBool"
             },
-            "addRight": {
+            "toType": {
+                "tag": "TBool"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": "x",
+            "lamBody": {
                 "tag": "EVar",
-                "varName": "b"
+                "varName": "x"
+            }
+        }
+    },
+    {
+        "tag": "ValueDecl",
+        "declValueName": "result",
+        "declValueType": {
+            "tag": "TBool"
+        },
+        "declValueBody": {
+            "tag": "EApp",
+            "appFunc": {
+                "tag": "EVar",
+                "varName": "identity"
+            },
+            "appArg": {
+                "tag": "EBool",
+                "boolValue": true
             }
         }
     }
