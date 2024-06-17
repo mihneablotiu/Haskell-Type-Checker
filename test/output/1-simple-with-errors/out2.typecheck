@@ -2,3 +2,5 @@ Type mismatch of "True": Expected Int, but got Bool
 
 [x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
 [2 --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --D--> Number: Int]
+[addTwo --U--> Global Scope,Global Scope --D--> addTwo: (Int -> Int)]
+[True --U--> Global Scope,Global Scope --D--> True: Bool]

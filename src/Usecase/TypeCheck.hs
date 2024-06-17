@@ -31,7 +31,7 @@ typeCheckProgram program scopeGraph =
       (determinedErrors, determinedPaths, _) = runTypeCheckDecls program scopeGraph initialState
    in TypeCheckResult determinedErrors determinedPaths
 
-runTypeCheckDecls :: [Decl] -> ScopeGraph -> SearchState -> ([TypeError], [Path], SearchState)
+runTypeCheckDecls :: Program -> ScopeGraph -> SearchState -> ([TypeError], [Path], SearchState)
 runTypeCheckDecls decls scopeGraph searchState =
   foldl
     ( \(accErrors, accPaths, accState) decl ->
@@ -55,8 +55,8 @@ typeCheckExpr scopeGraph wantedType expr searchState =
         Right foundType ->
             if foundType == wantedType
             then ([], foundPaths, newState)
-            else ([Mismatch (show expr) wantedType foundType], [], newState)
-        Left err -> ([err], [], newState)
+            else ([Mismatch (show expr) wantedType foundType], foundPaths, newState)
+        Left err -> ([err], foundPaths, newState)
 
 findType :: ScopeGraph -> Expr -> SearchState -> (Either TypeError Type, [Path], SearchState)
 findType scopeGraph (ENum value) searchState = 
@@ -82,15 +82,15 @@ findType scopeGraph (EAdd left right) searchState =
         (rightResult, rightPaths, rightState) = findType scopeGraph right leftState
     in case (leftResult, rightResult) of
         (Right TNum, Right TNum) -> (Right TNum, leftPaths ++ rightPaths, rightState)
-        (Right _, Right _) -> (Left (UnexpectedError "Addition of non-numeric types"), [], rightState)
-        (Left le, _) -> (Left le, [], leftState)
-        (_, Left re) -> (Left re, [], rightState)
+        (Right _, Right _) -> (Left (UnexpectedError "Addition of non-numeric types"), leftPaths ++ rightPaths, rightState)
+        (Left le, _) -> (Left le, leftPaths ++ rightPaths, leftState)
+        (_, Left re) -> (Left re, leftPaths ++ rightPaths, rightState)
 
 findType scopeGraph (ELam (_, argType) body) searchState =
     let (bodyResult, bodyPaths, bodyState) = findType scopeGraph body searchState
     in case bodyResult of
         Right bodyType -> (Right (TFun argType bodyType), bodyPaths, bodyState)
-        Left err -> (Left err, [], bodyState)
+        Left err -> (Left err, bodyPaths, bodyState)
 
 findType scopeGraph (EApp func arg) searchState = 
     let (funcResult, funcPaths, funcState) = findType scopeGraph func searchState
@@ -101,10 +101,10 @@ findType scopeGraph (EApp func arg) searchState =
                 Right argType ->
                     if inputType == argType
                     then (Right outputType, funcPaths ++ argPaths, argState)
-                    else (Left (Mismatch (show arg) inputType argType), [], argState)
-                Left err -> (Left err, [], argState)
-        Right funcType -> (Left (UnexpectedError ("Expected function type, got " ++ show funcType)), [], funcState)
-        Left err -> (Left err, [], funcState)
+                    else (Left (Mismatch (show arg) inputType argType), funcPaths ++ argPaths, argState)
+                Left err -> (Left err, funcPaths ++ argPaths, argState)
+        Right funcType -> (Left (UnexpectedError ("Expected function type, got " ++ show funcType)), funcPaths, funcState)
+        Left err -> (Left err, funcPaths, funcState)
 
 checkGraphOccurrence :: ScopeGraph -> String -> SearchState -> SearchPattern -> (Either TypeError Path, SearchState)
 checkGraphOccurrence scopeGraph name searchState searchPattern =

@@ -1,3 +1,5 @@
 Type mismatch of "7": Expected Bool, but got Int
 
 [1 --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --D--> Number: Int]
+[boolToInt --U--> Global Scope,Global Scope --D--> boolToInt: (Bool -> Int)]
+[7 --U--> Global Scope,Global Scope --D--> Number: Int]

@@ -1,0 +1,9 @@
+No errors found
+[f --U--> x's Lambda Scope,x's Lambda Scope --P--> f's Lambda Scope,f's Lambda Scope --D--> f: (Int -> Int)]
+[f --U--> x's Lambda Scope,x's Lambda Scope --P--> f's Lambda Scope,f's Lambda Scope --D--> f: (Int -> Int)]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[1 --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --D--> Number: Int]
+[applyTwice --U--> Global Scope,Global Scope --D--> applyTwice: ((Int -> Int) -> (Int -> Int))]
+[increment --U--> Global Scope,Global Scope --D--> increment: (Int -> Int)]
+[5 --U--> Global Scope,Global Scope --D--> Number: Int]
