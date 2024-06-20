@@ -5,12 +5,12 @@
         "declFuncType": {
             "tag": "TFun",
             "fromType": {
-                "tag": "TNum"
+                "tag": "TBool"
             },
             "toType": {
                 "tag": "TFun",
                 "fromType": {
-                    "tag": "TNum"
+                    "tag": "TBool"
                 },
                 "toType": {
                     "tag": "TNum"
@@ -22,7 +22,7 @@
             "lamArg": [
                 "x",
                 {
-                    "tag": "TNum"
+                    "tag": "TBool"
                 }
             ],
             "lamBody": {
@@ -30,7 +30,7 @@
                 "lamArg": [
                     "y",
                     {
-                        "tag": "TNum"
+                        "tag": "TBool"
                     }
                 ],
                 "lamBody": {
@@ -60,7 +60,7 @@
                 "toType": {
                     "tag": "TFun",
                     "fromType": {
-                        "tag": "TNum"
+                        "tag": "TBool"
                     },
                     "toType": {
                         "tag": "TNum"
@@ -70,7 +70,7 @@
             "toType": {
                 "tag": "TFun",
                 "fromType": {
-                    "tag": "TNum"
+                    "tag": "TBool"
                 },
                 "toType": {
                     "tag": "TFun",
@@ -95,7 +95,7 @@
                     "toType": {
                         "tag": "TFun",
                         "fromType": {
-                            "tag": "TNum"
+                            "tag": "TBool"
                         },
                         "toType": {
                             "tag": "TNum"
@@ -108,7 +108,7 @@
                 "lamArg": [
                     "x",
                     {
-                        "tag": "TNum"
+                        "tag": "TBool"
                     }
                 ],
                 "lamBody": {

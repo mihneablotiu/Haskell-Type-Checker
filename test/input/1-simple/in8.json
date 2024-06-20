@@ -1,0 +1,83 @@
+[
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "x",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TNum"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": [
+                "y",
+                {
+                    "tag": "TNum"
+                }
+            ],
+            "lamBody": {
+                "tag": "EAdd",
+                "addLeft": {
+                    "tag": "EVar",
+                    "varName": "y"
+                },
+                "addRight": {
+                    "tag": "ENum",
+                    "numValue": 1
+                }
+            }
+        }
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "add",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TFun",
+                "fromType": {
+                    "tag": "TNum"
+                },
+                "toType": {
+                    "tag": "TNum"
+                }
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": [
+                "x",
+                {
+                    "tag": "TNum"
+                }
+            ],
+            "lamBody": {
+                "tag": "ELam",
+                "lamArg": [
+                    "y",
+                    {
+                        "tag": "TNum"
+                    }
+                ],
+                "lamBody": {
+                    "tag": "EAdd",
+                    "addLeft": {
+                        "tag": "EVar",
+                        "varName": "x"
+                    },
+                    "addRight": {
+                        "tag": "EVar",
+                        "varName": "y"
+                    }
+                }
+            }
+        }
+    }
+]

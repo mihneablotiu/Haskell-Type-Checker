@@ -1,54 +1,6 @@
 [
     {
         "tag": "FuncDecl",
-        "declFuncName": "add",
-        "declFuncType": {
-            "tag": "TFun",
-            "fromType": {
-                "tag": "TNum"
-            },
-            "toType": {
-                "tag": "TFun",
-                "fromType": {
-                    "tag": "TNum"
-                },
-                "toType": {
-                    "tag": "TNum"
-                }
-            }
-        },
-        "declFuncBody": {
-            "tag": "ELam",
-            "lamArg": [
-                "x",
-                {
-                    "tag": "TNum"
-                }
-            ],
-            "lamBody": {
-                "tag": "ELam",
-                "lamArg": [
-                    "y",
-                    {
-                        "tag": "TNum"
-                    }
-                ],
-                "lamBody": {
-                    "tag": "EAdd",
-                    "addLeft": {
-                        "tag": "EVar",
-                        "varName": "x"
-                    },
-                    "addRight": {
-                        "tag": "EVar",
-                        "varName": "y"
-                    }
-                }
-            }
-        }
-    },
-    {
-        "tag": "FuncDecl",
         "declFuncName": "partialApply",
         "declFuncType": {
             "tag": "TFun",
@@ -115,7 +67,7 @@
                     "tag": "EApp",
                     "appFunc": {
                         "tag": "EVar",
-                        "varName": "f"
+                        "varName": "add"
                     },
                     "appArg": {
                         "tag": "ENum",

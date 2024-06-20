@@ -1,5 +1,5 @@
 module Domain.TypeCheck.SearchPattern where
 
 data SearchPattern
-    = VarUsage
+    = ValUsage
     | FuncCall deriving (Eq)

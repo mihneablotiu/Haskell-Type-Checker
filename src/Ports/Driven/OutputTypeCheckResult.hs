@@ -1,8 +1,5 @@
 module Ports.Driven.OutputTypeCheckResult where
-import Domain.ScopeGraph.ScopeGraph
-import Domain.Language.LanguageComponents (Program)
-import Usecase.TypeCheck (typeCheckProgram)
+import Usecase.TypeCheck (TypeCheckResult)
 
-scopeGraphTypeCheck :: FilePath -> ScopeGraph -> Program -> IO ()
-scopeGraphTypeCheck outputFilePath scopeGraph program =
-    writeFile outputFilePath $ show $ typeCheckProgram program scopeGraph 
+scopeGraphTypeCheck :: FilePath -> TypeCheckResult -> IO ()
+scopeGraphTypeCheck outputFilePath typeCheckResult = writeFile outputFilePath $ show typeCheckResult

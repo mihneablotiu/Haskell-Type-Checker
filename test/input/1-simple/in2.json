@@ -13,7 +13,12 @@
         },
         "declFuncBody": {
             "tag": "ELam",
-            "lamArg": ["x", {"tag": "TNum"}],
+            "lamArg": [
+                "x",
+                {
+                    "tag": "TNum"
+                }
+            ],
             "lamBody": {
                 "tag": "EAdd",
                 "addLeft": {

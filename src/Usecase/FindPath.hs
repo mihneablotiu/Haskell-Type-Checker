@@ -6,11 +6,11 @@ import Domain.TypeCheck.Path
 import Data.List (sortOn)
 
 dfs :: Node -> ScopeGraph -> SearchPattern -> Path -> [Path]
-dfs node scopeGraph VarUsage currentPath =
+dfs node scopeGraph ValUsage currentPath =
     if null currentPath then
         let possibleEdges = filter (\(Edge _ dest _) -> label dest == label node) (edges scopeGraph)
             uEdges = filter (\(Edge _ _ et) -> et == U) possibleEdges
-        in concatMap (\(Edge src dest et) -> dfs node scopeGraph VarUsage [PathComponent dest et src]) uEdges
+        in concatMap (\(Edge src dest et) -> dfs node scopeGraph ValUsage [PathComponent dest et src]) uEdges
     else
         let currentNode = toNode (last currentPath)
             possibleEdges = filter (\(Edge src dest et) -> (et == D && label src == label currentNode) ||
@@ -22,7 +22,7 @@ dfs node scopeGraph VarUsage currentPath =
                                then [newPath]
                                else if et == D
                                     then []
-                                    else dfs node scopeGraph VarUsage newPath
+                                    else dfs node scopeGraph ValUsage newPath
                     ) possibleEdges
 dfs _ _ FuncCall _ = []
 
@@ -30,8 +30,10 @@ findValidPath :: Node -> ScopeGraph -> SearchPattern -> Either TypeError Path
 findValidPath startNode scopeGraph pattern =
     let paths = dfs startNode scopeGraph pattern []
         numberOfPaths = length paths
+        possibleEdges = filter (\(Edge _ dest _) -> label dest == label startNode) (edges scopeGraph)
+        uEdges = filter (\(Edge _ _ et) -> et == U) possibleEdges
     in if numberOfPaths == 0
-         then Left $ NotInScope (extractNodeName startNode) (nodeInfo startNode)
+         then Left $ NotInScope (extractNodeName startNode) $ nodeInfo $ source $ head uEdges
          else if numberOfPaths == 1
                 then Right $ head paths
                 else 

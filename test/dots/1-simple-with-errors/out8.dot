@@ -1,18 +1,32 @@
 graph {
-    17 [label=7
+    24 [label=7
        ,shape=box
        ,style=dashed];
-    16 [label=f
+    23 [label=add
        ,shape=box
        ,style=dashed];
-    15 [label="x: Int",shape=box];
-    14 [label="x's Lambda Scope"
+    22 [label="x: Int",shape=box];
+    21 [label="x's Lambda Scope"
        ,shape=ellipse];
-    13 [label="f: (Int -> (Int -> Int))"
+    20 [label="f: (Int -> (Int -> Int))"
        ,shape=box];
-    12 [label="f's Lambda Scope"
+    19 [label="f's Lambda Scope"
        ,shape=ellipse];
-    11 [label="partialApply: ((Int -> (Int -> Int)) -> (Int -> (Int -> Int)))"
+    18 [label="partialApply: ((Int -> (Int -> Int)) -> (Int -> (Int -> Int)))"
+       ,shape=box];
+    17 [label=y
+       ,shape=box
+       ,style=dashed];
+    16 [label=x
+       ,shape=box
+       ,style=dashed];
+    15 [label="y: Bool",shape=box];
+    14 [label="y's Lambda Scope"
+       ,shape=ellipse];
+    13 [label="x: Bool",shape=box];
+    12 [label="x's Lambda Scope"
+       ,shape=ellipse];
+    11 [label="add: (Bool -> (Bool -> Int))"
        ,shape=box];
     10 [label=y
        ,shape=box
@@ -36,6 +50,19 @@ graph {
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
+    21 -- 24 [label=U,dir=back];
+    21 -- 23 [label=U,dir=back];
+    21 -- 22 [label=D
+             ,dir=forward
+             ,arrowhead=dot];
+    19 -- 21 [label=P,dir=back];
+    19 -- 20 [label=D
+             ,dir=forward
+             ,arrowhead=dot];
+    0 -- 19 [label=P,dir=back];
+    0 -- 18 [label=D
+            ,dir=forward
+            ,arrowhead=dot];
     14 -- 17 [label=U,dir=back];
     14 -- 16 [label=U,dir=back];
     14 -- 15 [label=D

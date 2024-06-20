@@ -7,7 +7,6 @@ import Data.GraphViz.Types.Monadic
 import Data.Text.Lazy (unpack)
 import Data.GraphViz.Attributes.Complete
 
--- Convert a ScopeGraph to DOT format
 scopeGraphToDot :: ScopeGraph -> IO ()
 scopeGraphToDot sg = putStrLn $ unpack $ renderDot $ toDot $ do
     graph' $ do

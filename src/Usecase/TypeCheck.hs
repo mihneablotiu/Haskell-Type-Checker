@@ -4,7 +4,7 @@ import qualified Data.Map as Map
 import Domain.Language.LanguageComponents
 import Domain.ScopeGraph.ScopeGraph
 import Domain.TypeCheck.Path
-import Domain.TypeCheck.SearchPattern (SearchPattern (VarUsage))
+import Domain.TypeCheck.SearchPattern
 import Domain.TypeCheck.TypeError
 import Usecase.FindPath (findValidPath)
 
@@ -60,19 +60,19 @@ typeCheckExpr scopeGraph wantedType expr searchState =
 
 findType :: ScopeGraph -> Expr -> SearchState -> (Either TypeError Type, [Path], SearchState)
 findType scopeGraph (ENum value) searchState = 
-    let (numResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState VarUsage
+    let (numResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState ValUsage
     in case numResult of
         Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
         Left err -> (Left err, [], newState)
 
 findType scopeGraph (EBool value) searchState = 
-    let (boolResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState VarUsage
+    let (boolResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState ValUsage
     in case boolResult of
         Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
         Left err -> (Left err, [], newState)
 
 findType scopeGraph (EVar name) searchState =
-    let (varResult, newState) = checkGraphOccurrence scopeGraph name searchState VarUsage
+    let (varResult, newState) = checkGraphOccurrence scopeGraph name searchState ValUsage
     in case varResult of
         Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
         Left err -> (Left err, [], newState)
