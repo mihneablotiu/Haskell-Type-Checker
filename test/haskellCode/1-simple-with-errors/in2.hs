@@ -1,3 +1,4 @@
+-- Actual parameter is not of the expected type
 addTwo :: Int -> Int
 addTwo x = x + 2
 

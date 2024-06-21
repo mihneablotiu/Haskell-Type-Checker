@@ -17,6 +17,7 @@ def run_tests():
         for file in files:
             if file.endswith('.json'):
                 input_file = os.path.join(root, file)
+                print(f"Running test {input_file}...")
                 relative_path = os.path.relpath(root, INPUT_DIR)
                 
                 dot_output_dir = os.path.join(DOT_DIR, relative_path)

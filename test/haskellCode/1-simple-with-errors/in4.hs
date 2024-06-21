@@ -1,3 +1,4 @@
+-- Wrong actual parameter type for increment
 double :: Int -> Int
 double x = x + x
 

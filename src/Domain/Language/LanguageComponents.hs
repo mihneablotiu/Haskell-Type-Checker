@@ -8,7 +8,7 @@ import GHC.Generics (Generic)
 newtype TypeClass = TypeClass { getTypeClass :: String } deriving (Show, Eq, Generic)
 instance FromJSON TypeClass
 
-newtype TypeVar = TypeVar { getTypeVar :: String } deriving (Show, Eq, Generic)
+newtype TypeVar = TypeVar { getTypeVar :: String } deriving (Show, Eq, Ord, Generic)
 instance FromJSON TypeVar
 
 data Type

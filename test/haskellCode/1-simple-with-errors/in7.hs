@@ -1,3 +1,4 @@
+-- Wrong return type for partialApply
 add :: Bool -> Bool -> Int
 add x y = x + y
 
