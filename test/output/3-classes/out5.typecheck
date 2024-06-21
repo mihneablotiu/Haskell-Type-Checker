@@ -1,0 +1,3 @@
+No errors found
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[1 --U--> x's Lambda Scope,x's Lambda Scope --P--> Instance Scope,Instance Scope --P--> Global Scope,Global Scope --D--> Number: Int]

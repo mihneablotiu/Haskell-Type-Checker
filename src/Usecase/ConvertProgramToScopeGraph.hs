@@ -81,7 +81,9 @@ convertExpr parentScope parentType scopeGraph (EApp func arg) =
 
 convertExpr parentScope parentType scopeGraph (ELam (name, _) body) =
     let (parameterType, bodyType) = case parentType of
-            TFun pt bt -> (pt, bt)
+            TFun pt bt -> case pt of 
+                TConstraint _ t -> (t, bt)
+                _ -> (pt , bt)
             _ -> error "Parent type must be a function type"
         (lambdaScopeNode, scopeGraphWithLambdaScope) = addNode (ScopeNode (name ++ "'s Lambda Scope")) scopeGraph
         scopeGraphWithParentEdge = addEdge parentScope lambdaScopeNode P scopeGraphWithLambdaScope

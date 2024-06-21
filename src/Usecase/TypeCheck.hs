@@ -46,10 +46,18 @@ typeCheckDecl scopeGraph (ValueDecl _ declaredType body) searchState =
   typeCheckExpr scopeGraph declaredType body searchState
 typeCheckDecl scopeGraph (FuncDecl _ declaredType body) searchState =
   typeCheckExpr scopeGraph declaredType body searchState
+typeCheckDecl scopeGraph (InstanceDecl _ _ funcDefs) searchState =
+  foldl (\(accErrors, accPaths, accState) (FuncDef _ declaredType body) ->
+           let (funcErrors, funcPaths, newState) = typeCheckExpr scopeGraph declaredType body accState
+            in (accErrors ++ funcErrors, accPaths ++ funcPaths, newState)
+        )
+        ([], [], searchState)
+        funcDefs
 typeCheckDecl _ _ searchState = ([], [], searchState)
 
+
 typeCheckExpr :: ScopeGraph -> Type -> Expr -> SearchState -> ([TypeError], [Path], SearchState)
-typeCheckExpr scopeGraph wantedType expr searchState = 
+typeCheckExpr scopeGraph wantedType expr searchState =
     let (foundTypeResult, foundPaths, newState) = findType scopeGraph expr searchState
     in case foundTypeResult of
         Right foundType ->
@@ -59,20 +67,20 @@ typeCheckExpr scopeGraph wantedType expr searchState =
         Left err -> ([err], foundPaths, newState)
 
 findType :: ScopeGraph -> Expr -> SearchState -> (Either TypeError Type, [Path], SearchState)
-findType scopeGraph (ENum value) searchState = 
+findType scopeGraph (ENum value) searchState =
     let (numResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState ValUsage
     in case numResult of
         Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
         Left err -> (Left err, [], newState)
 
-findType scopeGraph (EBool value) searchState = 
+findType scopeGraph (EBool value) searchState =
     let (boolResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState ValUsage
     in case boolResult of
         Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
         Left err -> (Left err, [], newState)
 
 findType scopeGraph (EVar name) searchState =
-    let (varResult, newState) = checkGraphOccurrence scopeGraph name searchState ValUsage
+    let (varResult, newState) = checkGraphOccurrence scopeGraph name searchState FuncCall
     in case varResult of
         Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
         Left err -> (Left err, [], newState)
@@ -92,7 +100,7 @@ findType scopeGraph (ELam (_, argType) body) searchState =
         Right bodyType -> (Right (TFun argType bodyType), bodyPaths, bodyState)
         Left err -> (Left err, bodyPaths, bodyState)
 
-findType scopeGraph (EApp func arg) searchState = 
+findType scopeGraph (EApp func arg) searchState =
     let (funcResult, funcPaths, funcState) = findType scopeGraph func searchState
         (argResult, argPaths, argState) = findType scopeGraph arg funcState
     in case funcResult of

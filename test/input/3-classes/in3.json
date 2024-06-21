@@ -1,0 +1,83 @@
+[
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "double",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TNum"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": [
+                "x",
+                {
+                    "tag": "TNum"
+                }
+            ],
+            "lamBody": {
+                "tag": "EAdd",
+                "addLeft": {
+                    "tag": "EVar",
+                    "varName": "x"
+                },
+                "addRight": {
+                    "tag": "EVar",
+                    "varName": "x"
+                }
+            }
+        }
+    },
+    {
+        "tag": "ClassDecl",
+        "declTypeClass": {
+            "getTypeClass": "Constants"
+        },
+        "declTypeVar": {
+            "getTypeVar": "a"
+        },
+        "declFuncSigs": [
+            {
+                "funcSigName": "twoSquared",
+                "funcSigType": {
+                    "tag": "TVar",
+                    "typeVar": {
+                        "getTypeVar": "a"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "tag": "InstanceDecl",
+        "declTypeClass": {
+            "getTypeClass": "Constants"
+        },
+        "declType": {
+            "tag": "TNum"
+        },
+        "declFuncDefs": [
+            {
+                "funcDefName": "twoSquared",
+                "funcDefType": {
+                    "tag": "TNum"
+                },
+                "funcDefBody": {
+                    "tag": "EApp",
+                    "appFunc": {
+                        "tag": "EVar",
+                        "varName": "double"
+                    },
+                    "appArg": {
+                        "tag": "ENum",
+                        "numValue": 2
+                    }
+                }
+            }
+        ]
+    }
+]

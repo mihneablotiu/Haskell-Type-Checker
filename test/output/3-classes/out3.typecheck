@@ -1,0 +1,5 @@
+No errors found
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[double --U--> Instance Scope,Instance Scope --P--> Global Scope,Global Scope --D--> double: (Int -> Int)]
+[2 --U--> Instance Scope,Instance Scope --P--> Global Scope,Global Scope --D--> Number: Int]

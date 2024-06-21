@@ -1,0 +1,79 @@
+[
+    {
+        "tag": "ClassDecl",
+        "declTypeClass": { "getTypeClass": "A" },
+        "declTypeVar": { "getTypeVar": "a" },
+        "declFuncSigs": [
+            {
+                "funcSigName": "==",
+                "funcSigType": {
+                    "tag": "TFun",
+                    "fromType": { "tag": "TVar", "typeVar": { "getTypeVar": "a" } },
+                    "toType": {
+                        "tag": "TFun",
+                        "fromType": { "tag": "TVar", "typeVar": { "getTypeVar": "a" } },
+                        "toType": { "tag": "TBool" }
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "tag": "InstanceDecl",
+        "declTypeClass": { "getTypeClass": "A" },
+        "declType": { "tag": "TBool" },
+        "declFuncDefs": [
+            {
+                "funcDefName": "==",
+                "funcDefType": {
+                    "tag": "TFun",
+                    "fromType": { "tag": "TBool" },
+                    "toType": {
+                        "tag": "TFun",
+                        "fromType": { "tag": "TBool" },
+                        "toType": { "tag": "TBool" }
+                    }
+                },
+                "funcDefBody": {
+                    "tag": "ELam",
+                    "lamArg": ["x", { "tag": "TBool" }],
+                    "lamBody": {
+                        "tag": "ELam",
+                        "lamArg": ["y", { "tag": "TBool" }],
+                        "lamBody": { "tag": "EBool", "boolValue": true }
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "testFunc",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": { "tag": "TBool" },
+            "toType": {
+                "tag": "TFun",
+                "fromType": { "tag": "TBool" },
+                "toType": { "tag": "TBool" }
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": ["x", { "tag": "TBool" }],
+            "lamBody": {
+                "tag": "ELam",
+                "lamArg": ["y", { "tag": "TBool" }],
+                "lamBody": {
+                    "tag": "EApp",
+                    "appFunc": {
+                        "tag": "EApp",
+                        "appFunc": { "tag": "EVar", "varName": "==" },
+                        "appArg": { "tag": "EVar", "varName": "x" }
+                    },
+                    "appArg": { "tag": "EVar", "varName": "y" }
+                }
+            }
+        }
+    }
+]

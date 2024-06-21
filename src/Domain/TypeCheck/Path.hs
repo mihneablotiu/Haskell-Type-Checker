@@ -3,7 +3,7 @@ import Domain.ScopeGraph.ScopeGraph
 
 data PathComponent = PathComponent {
     fromNode :: Node,
-    edgeType :: EdgeType,
+    edgeT :: EdgeType,
     toNode :: Node
 } deriving (Eq)
 

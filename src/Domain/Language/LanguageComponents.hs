@@ -24,6 +24,7 @@ instance Show Type where
     show TNum = "Int"
     show TBool = "Bool"
     show (TVar (TypeVar tv)) = tv
+    show (TFun (TConstraint (TypeClass tc) t) to) = "(" ++ tc ++ " " ++ show t ++ " => " ++ show to ++ ")"
     show (TFun from to) = "(" ++ show from ++ " -> " ++ show to ++ ")"
     show (TConstraint (TypeClass tc) t) = tc ++ " " ++ show t
 

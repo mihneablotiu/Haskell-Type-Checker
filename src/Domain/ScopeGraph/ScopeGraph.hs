@@ -54,6 +54,7 @@ declNodeNameMatches _ _ = False
 extractNodeName :: Node -> String
 extractNodeName (Node _ (UsageNode name)) = name
 extractNodeName (Node _ (DeclNode name _)) = name
+extractNodeName (Node _ (TypeClassNode (TypeClass tc) _)) = tc
 extractNodeName _ = error "Node does not have a name"
 
 type SearchState = Map String Int

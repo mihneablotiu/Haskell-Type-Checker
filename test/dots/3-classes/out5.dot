@@ -1,0 +1,68 @@
+graph {
+    13 [label=1
+       ,shape=box
+       ,style=dashed];
+    12 [label=x
+       ,shape=box
+       ,style=dashed];
+    11 [label="x: Int",shape=box];
+    10 [label="x's Lambda Scope"
+       ,shape=ellipse];
+    9 [label="g: (Int -> Int)"
+      ,shape=box];
+    8 [label="Instance Scope"
+      ,shape=ellipse];
+    7 [label="Int: INST(B)"
+      ,shape=box];
+    6 [label="g: (b -> b)"
+      ,shape=box];
+    5 [label="Class Scope"
+      ,shape=ellipse];
+    4 [label="B: TCLASS(b)"
+      ,shape=box];
+    3 [label="Number: Int"
+      ,shape=box];
+    2 [label="False: Bool"
+      ,shape=box];
+    1 [label="True: Bool"
+      ,shape=box];
+    0 [label="Global Scope"
+      ,shape=ellipse];
+    10 -- 13 [label=U,dir=back];
+    10 -- 12 [label=U,dir=back];
+    10 -- 11 [label=D
+             ,dir=forward
+             ,arrowhead=dot];
+    8 -- 10 [label=P,dir=back];
+    8 -- 9 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    7 -- 8 [label=Eq
+           ,dir=both
+           ,arrowhead=dot
+           ,arrowtail=dot];
+    0 -- 8 [label=P,dir=back];
+    0 -- 7 [label=I
+           ,dir=forward
+           ,arrowhead=dot];
+    5 -- 6 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    4 -- 5 [label=Eq
+           ,dir=both
+           ,arrowhead=dot
+           ,arrowtail=dot];
+    0 -- 5 [label=P,dir=back];
+    0 -- 4 [label=TC
+           ,dir=forward
+           ,arrowhead=dot];
+    0 -- 3 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    0 -- 2 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    0 -- 1 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+}

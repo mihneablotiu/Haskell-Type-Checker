@@ -4,6 +4,7 @@ import Domain.TypeCheck.SearchPattern
 import Domain.TypeCheck.TypeError
 import Domain.TypeCheck.Path
 import Data.List (sortOn)
+import Domain.Language.LanguageComponents (TypeClass)
 
 dfs :: Node -> ScopeGraph -> SearchPattern -> Path -> [Path]
 dfs node scopeGraph ValUsage currentPath =
@@ -24,7 +25,48 @@ dfs node scopeGraph ValUsage currentPath =
                                     then []
                                     else dfs node scopeGraph ValUsage newPath
                     ) possibleEdges
-dfs _ _ FuncCall _ = []
+
+dfs node scopeGraph FuncCall currentPath =
+    if null currentPath then
+        let possibleEdges = filter (\(Edge _ dest _) -> label dest == label node) (edges scopeGraph)
+            uEdges = filter (\(Edge _ _ et) -> et == U) possibleEdges
+        in concatMap (\(Edge src dest et) -> dfs node scopeGraph FuncCall [PathComponent dest et src]) uEdges
+    else
+        let currentNode = toNode (last currentPath)
+            possibleEdges = filter (\(Edge src dest et) -> (et == D && label src == label currentNode) ||
+                                                           (et == P && label dest == label currentNode && edgeT (last currentPath) /= Eq) ||
+                                                           (et == TC && label src == label currentNode && edgeT (last currentPath) == P) ||
+                                                           (et == Eq && label src == label currentNode && edgeT (last currentPath) == TC)) (edges scopeGraph)
+        in concatMap (\(Edge src dest et) ->
+                            let newComponent = if et == D || et == TC || et == Eq then PathComponent src et dest else PathComponent dest et src
+                                newPath = currentPath ++ [newComponent]
+                            in if et == D && declNodeNameMatches dest (extractNodeName node)
+                                then [newPath]
+                                else if et == D
+                                    then []
+                                    else dfs node scopeGraph FuncCall newPath
+                    ) possibleEdges
+
+dfs node scopeGraph (InstanceUsage tcName) currentPath =
+    if null currentPath then
+        let possibleEdges = filter (\(Edge _ dest _) -> label dest == label node) (edges scopeGraph)
+            uEdges = filter (\(Edge _ _ et) -> et == U) possibleEdges
+        in concatMap (\(Edge src dest et) -> dfs node scopeGraph (InstanceUsage tcName) [PathComponent dest et src]) uEdges
+    else
+        let currentNode = toNode (last currentPath)
+            possibleEdges = filter (\(Edge src dest et) -> (et == I && label src == label currentNode) ||
+                                                           (et == P && label dest == label currentNode)) (edges scopeGraph)
+        in concatMap (\(Edge src dest et) ->
+                            let newComponent = if et == I then PathComponent src et dest else PathComponent dest et src
+                                newPath = currentPath ++ [newComponent]
+                            in if et == I && instanceNodeMatchesTypeClass dest tcName
+                               then [newPath]
+                               else dfs node scopeGraph (InstanceUsage tcName) newPath
+                    ) possibleEdges
+
+instanceNodeMatchesTypeClass :: Node -> TypeClass -> Bool
+instanceNodeMatchesTypeClass (Node _ (InstanceNode tc _)) tcName = tc == tcName
+instanceNodeMatchesTypeClass _ _ = False
 
 findValidPath :: Node -> ScopeGraph -> SearchPattern -> Either TypeError Path
 findValidPath startNode scopeGraph pattern =
