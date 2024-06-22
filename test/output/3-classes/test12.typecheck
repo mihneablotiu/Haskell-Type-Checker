@@ -1,0 +1,11 @@
+No errors found
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[h --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --TC--> A: TCLASS(a),A: TCLASS(a) --Eq--> Class Scope,Class Scope --D--> h: (a -> a)]
+[g --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --TC--> A: TCLASS(a),A: TCLASS(a) --Eq--> Class Scope,Class Scope --D--> g: (Int -> a)]
+[f --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --TC--> A: TCLASS(a),A: TCLASS(a) --Eq--> Class Scope,Class Scope --D--> f: (a -> Int)]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[f --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --I--> Int: INST(A)]
+[g --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --I--> Int: INST(A)]
+[h --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --I--> Int: INST(A)]

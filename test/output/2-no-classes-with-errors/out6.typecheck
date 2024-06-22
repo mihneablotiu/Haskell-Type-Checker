@@ -1,4 +1,4 @@
-Unexpected error: Test
+Type mismatch of 5: Expected (Int -> Int), but got Int
 
 [f --U--> x's Lambda Scope,x's Lambda Scope --P--> f's Lambda Scope,f's Lambda Scope --D--> f: (Int -> Int)]
 [f --U--> x's Lambda Scope,x's Lambda Scope --P--> f's Lambda Scope,f's Lambda Scope --D--> f: (Int -> Int)]

@@ -117,7 +117,7 @@ findType scopeGraph (EApp func arg) searchState =
                             Left _ -> (Left (InstanceNotFound (TypeClass (show classNode)) argType), funcPaths ++ argPaths, argState)
                        else if inputType == argType
                             then (Right outputType, funcPaths ++ argPaths, argState)
-                            else (Left (UnexpectedError "Test"), funcPaths ++ argPaths, argState)
+                            else (Left (Mismatch (show arg) inputType argType), funcPaths ++ argPaths, argState)
                 Left err -> (Left err, funcPaths ++ argPaths, argState)
         Right funcType -> (Left (UnexpectedError ("Expected function type, got " ++ show funcType)), funcPaths, funcState)
         Left err -> (Left err, funcPaths, funcState)
