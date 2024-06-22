@@ -1,0 +1,4 @@
+Arithmetic error: Expected Int, but got a and a
+
+[f --U--> Global Scope,Global Scope --TC--> A: TCLASS(a),A: TCLASS(a) --Eq--> Class Scope,Class Scope --D--> f: a]
+[g --U--> Global Scope,Global Scope --TC--> A: TCLASS(a),A: TCLASS(a) --Eq--> Class Scope,Class Scope --D--> g: a]

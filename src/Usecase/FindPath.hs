@@ -15,7 +15,7 @@ dfs node scopeGraph Reference currentPath =
         let currentNode = toNode (last currentPath)
             possibleEdges = filter (\(Edge src dest et) -> (et == D && label src == label currentNode) ||
                                                            (et == P && label dest == label currentNode && edgeT (last currentPath) /= Eq) ||
-                                                           (et == TC && label src == label currentNode && edgeT (last currentPath) == P) ||
+                                                           (et == TC && label src == label currentNode && (edgeT (last currentPath) == P || edgeT (last currentPath) == U)) ||
                                                            (et == Eq && label src == label currentNode && edgeT (last currentPath) == TC)) (edges scopeGraph)
         in concatMap (\(Edge src dest et) ->
                             let newComponent = if et == D || et == TC || et == Eq then PathComponent src et dest else PathComponent dest et src

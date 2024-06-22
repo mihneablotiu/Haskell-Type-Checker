@@ -1,0 +1,3 @@
+Type mismatch of f: Expected (Bool -> Bool), but got (a -> (a -> Bool))
+
+[f --U--> Instance Scope,Instance Scope --P--> Global Scope,Global Scope --TC--> A: TCLASS(a),A: TCLASS(a) --Eq--> Class Scope,Class Scope --D--> f: (a -> (a -> Bool))]

@@ -1,0 +1,64 @@
+graph {
+    13 [label=g
+       ,shape=box
+       ,style=dashed];
+    12 [label=f
+       ,shape=box
+       ,style=dashed];
+    11 [label="h: Int",shape=box];
+    10 [label=2
+       ,shape=box
+       ,style=dashed];
+    9 [label="g: Int",shape=box];
+    8 [label=1
+      ,shape=box
+      ,style=dashed];
+    7 [label="f: Int",shape=box];
+    6 [label="Instance Scope"
+      ,shape=ellipse];
+    5 [label="Int: INST(A)"
+      ,shape=box];
+    4 [label="g: a",shape=box];
+    3 [label="f: a",shape=box];
+    2 [label="Class Scope"
+      ,shape=ellipse];
+    1 [label="A: TCLASS(a)"
+      ,shape=box];
+    0 [label="Global Scope"
+      ,shape=ellipse];
+    0 -- 13 [label=U,dir=back];
+    0 -- 12 [label=U,dir=back];
+    0 -- 11 [label=D
+            ,dir=forward
+            ,arrowhead=dot];
+    6 -- 10 [label=U,dir=back];
+    6 -- 9 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    6 -- 8 [label=U,dir=back];
+    6 -- 7 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    5 -- 6 [label=Eq
+           ,dir=both
+           ,arrowhead=dot
+           ,arrowtail=dot];
+    0 -- 6 [label=P,dir=back];
+    0 -- 5 [label=I
+           ,dir=forward
+           ,arrowhead=dot];
+    2 -- 4 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    2 -- 3 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    1 -- 2 [label=Eq
+           ,dir=both
+           ,arrowhead=dot
+           ,arrowtail=dot];
+    0 -- 2 [label=P,dir=back];
+    0 -- 1 [label=TC
+           ,dir=forward
+           ,arrowhead=dot];
+}

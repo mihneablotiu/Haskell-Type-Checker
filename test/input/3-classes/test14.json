@@ -1,0 +1,80 @@
+[
+    {
+        "tag": "ClassDecl",
+        "declTypeClass": {
+            "getTypeClass": "A"
+        },
+        "declTypeVar": {
+            "getTypeVar": "a"
+        },
+        "declFuncSigs": [
+            {
+                "funcSigName": "f",
+                "funcSigType": {
+                    "tag": "TVar",
+                    "typeVar": {
+                        "getTypeVar": "a"
+                    }
+                }
+            },
+            {
+                "funcSigName": "g",
+                "funcSigType": {
+                    "tag": "TVar",
+                    "typeVar": {
+                        "getTypeVar": "a"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "tag": "InstanceDecl",
+        "declTypeClass": {
+            "getTypeClass": "A"
+        },
+        "declType": {
+            "tag": "TNum"
+        },
+        "declFuncDefs": [
+            {
+                "funcDefName": "f",
+                "funcDefType": {
+                    "tag": "TNum"
+                },
+                "funcDefBody": {
+                    "tag": "ENum",
+                    "numValue": 1
+                }
+            },
+            {
+                "funcDefName": "g",
+                "funcDefType": {
+                    "tag": "TNum"
+                },
+                "funcDefBody": {
+                    "tag": "ENum",
+                    "numValue": 2
+                }
+            }
+        ]
+    },
+    {
+        "tag": "ValueDecl",
+        "declValueName": "h",
+        "declValueType": {
+            "tag": "TNum"
+        },
+        "declValueBody": {
+            "tag": "EAdd",
+            "addLeft": {
+                "tag": "EVar",
+                "varName": "f"
+            },
+            "addRight": {
+                "tag": "EVar",
+                "varName": "g"
+            }
+        }
+    }
+]
