@@ -9,7 +9,7 @@
         },
         "declFuncSigs": [
             {
-                "funcSigName": "==",
+                "funcSigName": "f",
                 "funcSigType": {
                     "tag": "TFun",
                     "fromType": {
@@ -19,16 +19,7 @@
                         }
                     },
                     "toType": {
-                        "tag": "TFun",
-                        "fromType": {
-                            "tag": "TVar",
-                            "typeVar": {
-                                "getTypeVar": "a"
-                            }
-                        },
-                        "toType": {
-                            "tag": "TBool"
-                        }
+                        "tag": "TNum"
                     }
                 }
             }
@@ -44,20 +35,14 @@
         },
         "declFuncDefs": [
             {
-                "funcDefName": "==",
+                "funcDefName": "f",
                 "funcDefType": {
                     "tag": "TFun",
                     "fromType": {
                         "tag": "TNum"
                     },
                     "toType": {
-                        "tag": "TFun",
-                        "fromType": {
-                            "tag": "TNum"
-                        },
-                        "toType": {
-                            "tag": "TNum"
-                        }
+                        "tag": "TNum"
                     }
                 },
                 "funcDefBody": {
@@ -69,16 +54,14 @@
                         }
                     ],
                     "lamBody": {
-                        "tag": "ELam",
-                        "lamArg": [
-                            "y",
-                            {
-                                "tag": "TNum"
-                            }
-                        ],
-                        "lamBody": {
+                        "tag": "EAdd",
+                        "addLeft": {
+                            "tag": "EVar",
+                            "varName": "x"
+                        },
+                        "addRight": {
                             "tag": "ENum",
-                            "numValue": 0
+                            "numValue": 1
                         }
                     }
                 }
@@ -91,16 +74,10 @@
         "declFuncType": {
             "tag": "TFun",
             "fromType": {
-                "tag": "TBool"
+                "tag": "TNum"
             },
             "toType": {
-                "tag": "TFun",
-                "fromType": {
-                    "tag": "TBool"
-                },
-                "toType": {
-                    "tag": "TBool"
-                }
+                "tag": "TNum"
             }
         },
         "declFuncBody": {
@@ -108,33 +85,31 @@
             "lamArg": [
                 "x",
                 {
-                    "tag": "TBool"
+                    "tag": "TNum"
                 }
             ],
             "lamBody": {
-                "tag": "ELam",
-                "lamArg": [
-                    "y",
-                    {
-                        "tag": "TBool"
-                    }
-                ],
-                "lamBody": {
+                "tag": "EApp",
+                "appFunc": {
+                    "tag": "EVar",
+                    "varName": "f"
+                },
+                "appArg": {
                     "tag": "EApp",
                     "appFunc": {
+                        "tag": "EVar",
+                        "varName": "f"
+                    },
+                    "appArg": {
                         "tag": "EApp",
                         "appFunc": {
                             "tag": "EVar",
-                            "varName": "=="
+                            "varName": "f"
                         },
                         "appArg": {
                             "tag": "EVar",
                             "varName": "x"
                         }
-                    },
-                    "appArg": {
-                        "tag": "EVar",
-                        "varName": "y"
                     }
                 }
             }
