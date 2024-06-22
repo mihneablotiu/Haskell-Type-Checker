@@ -1,0 +1,5 @@
+No errors found
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[f --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --D--> f: (Int -> Int)]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]

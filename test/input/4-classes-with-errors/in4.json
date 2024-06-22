@@ -1,0 +1,130 @@
+[
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "f",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TNum"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": [
+                "x",
+                {
+                    "tag": "TNum"
+                }
+            ],
+            "lamBody": {
+                "tag": "EVar",
+                "varName": "x"
+            }
+        }
+    },
+    {
+        "tag": "ClassDecl",
+        "declTypeClass": {
+            "getTypeClass": "A"
+        },
+        "declTypeVar": {
+            "getTypeVar": "a"
+        },
+        "declFuncSigs": [
+            {
+                "funcSigName": "f",
+                "funcSigType": {
+                    "tag": "TFun",
+                    "fromType": {
+                        "tag": "TVar",
+                        "typeVar": {
+                            "getTypeVar": "a"
+                        }
+                    },
+                    "toType": {
+                        "tag": "TNum"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "tag": "InstanceDecl",
+        "declTypeClass": {
+            "getTypeClass": "A"
+        },
+        "declType": {
+            "tag": "TNum"
+        },
+        "declFuncDefs": [
+            {
+                "funcDefName": "f",
+                "funcDefType": {
+                    "tag": "TFun",
+                    "fromType": {
+                        "tag": "TNum"
+                    },
+                    "toType": {
+                        "tag": "TNum"
+                    }
+                },
+                "funcDefBody": {
+                    "tag": "ELam",
+                    "lamArg": [
+                        "x",
+                        {
+                            "tag": "TNum"
+                        }
+                    ],
+                    "lamBody": {
+                        "tag": "EAdd",
+                        "addLeft": {
+                            "tag": "EVar",
+                            "varName": "x"
+                        },
+                        "addRight": {
+                            "tag": "ENum",
+                            "numValue": 1
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "testFunc",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TNum"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": [
+                "x",
+                {
+                    "tag": "TNum"
+                }
+            ],
+            "lamBody": {
+                "tag": "EApp",
+                "appFunc": {
+                    "tag": "EVar",
+                    "varName": "f"
+                },
+                "appArg": {
+                    "tag": "EVar",
+                    "varName": "x"
+                }
+            }
+        }
+    }
+]

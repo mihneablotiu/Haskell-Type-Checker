@@ -1,0 +1,155 @@
+[
+    {
+        "tag": "ClassDecl",
+        "declTypeClass": {
+            "getTypeClass": "B"
+        },
+        "declTypeVar": {
+            "getTypeVar": "b"
+        },
+        "declFuncSigs": [
+            {
+                "funcSigName": "g",
+                "funcSigType": {
+                    "tag": "TFun",
+                    "fromType": {
+                        "tag": "TVar",
+                        "typeVar": {
+                            "getTypeVar": "b"
+                        }
+                    },
+                    "toType": {
+                        "tag": "TVar",
+                        "typeVar": {
+                            "getTypeVar": "b"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "tag": "InstanceDecl",
+        "declTypeClass": {
+            "getTypeClass": "B"
+        },
+        "declType": {
+            "tag": "TNum"
+        },
+        "declFuncDefs": [
+            {
+                "funcDefName": "g",
+                "funcDefType": {
+                    "tag": "TFun",
+                    "fromType": {
+                        "tag": "TNum"
+                    },
+                    "toType": {
+                        "tag": "TNum"
+                    }
+                },
+                "funcDefBody": {
+                    "tag": "ELam",
+                    "lamArg": [
+                        "x",
+                        {
+                            "tag": "TNum"
+                        }
+                    ],
+                    "lamBody": {
+                        "tag": "EAdd",
+                        "addLeft": {
+                            "tag": "EVar",
+                            "varName": "x"
+                        },
+                        "addRight": {
+                            "tag": "ENum",
+                            "numValue": 1
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "tag": "InstanceDecl",
+        "declTypeClass": {
+            "getTypeClass": "B"
+        },
+        "declType": {
+            "tag": "TVar",
+            "typeVar": {
+                "getTypeVar": "a"
+            }
+        },
+        "declFuncDefs": [
+            {
+                "funcDefName": "g",
+                "funcDefType": {
+                    "tag": "TFun",
+                    "fromType": {
+                        "tag": "TVar",
+                        "typeVar": {
+                            "getTypeVar": "a"
+                        }
+                    },
+                    "toType": {
+                        "tag": "TVar",
+                        "typeVar": {
+                            "getTypeVar": "a"
+                        }
+                    }
+                },
+                "funcDefBody": {
+                    "tag": "ELam",
+                    "lamArg": [
+                        "x",
+                        {
+                            "tag": "TVar",
+                            "typeVar": {
+                                "getTypeVar": "a"
+                            }
+                        }
+                    ],
+                    "lamBody": {
+                        "tag": "EVar",
+                        "varName": "x"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "testFunc",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TNum"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": [
+                "x",
+                {
+                    "tag": "TNum"
+                }
+            ],
+            "lamBody": {
+                "tag": "EApp",
+                "appFunc": {
+                    "tag": "EVar",
+                    "varName": "g"
+                },
+                "appArg": {
+                    "tag": "EVar",
+                    "varName": "x"
+                }
+            }
+        }
+    }
+]

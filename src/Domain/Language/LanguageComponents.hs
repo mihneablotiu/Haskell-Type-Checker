@@ -23,7 +23,6 @@ data Type
     | TBool
     | TVar { typeVar :: TypeVar }
     | TFun { fromType :: Type, toType :: Type }
-    | TConstraint { typeClass :: TypeClass, constrainedType :: TypeVar, bodyType :: Type }
     deriving (Eq, Generic)
 instance FromJSON Type
 
@@ -32,8 +31,7 @@ instance Show Type where
     show TBool = "Bool"
     show (TVar var) = getTypeVar var
     show (TFun from to) = "(" ++ show from ++ " -> " ++ show to ++ ")"
-    show (TConstraint tc var body) = show tc ++ " " ++ show var ++ " => " ++ show body
-
+    
 data Expr
     = EVar { varName :: String }
     | ENum { numValue :: Int }

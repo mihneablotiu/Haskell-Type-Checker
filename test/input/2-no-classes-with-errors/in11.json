@@ -1,0 +1,54 @@
+[
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "f",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TNum"
+            },
+            "toType": {
+                "tag": "TNum"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": [
+                "x",
+                {
+                    "tag": "TNum"
+                }
+            ],
+            "lamBody": {
+                "tag": "EBool",
+                "boolValue": true
+            }
+        }
+    },
+    {
+        "tag": "FuncDecl",
+        "declFuncName": "g",
+        "declFuncType": {
+            "tag": "TFun",
+            "fromType": {
+                "tag": "TBool"
+            },
+            "toType": {
+                "tag": "TBool"
+            }
+        },
+        "declFuncBody": {
+            "tag": "ELam",
+            "lamArg": [
+                "x",
+                {
+                    "tag": "TBool"
+                }
+            ],
+            "lamBody": {
+                "tag": "ENum",
+                "numValue": 1
+            }
+        }
+    }
+]

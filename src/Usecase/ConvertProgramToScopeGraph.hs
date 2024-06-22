@@ -15,10 +15,7 @@ convertDecl parentScope scopeGraph (ClassDecl tc tv funcSigs) =
         (classScopeNode, scopeGraphWithClassScope) = addNode (ScopeNode "Class Scope") scopeGraphWithClassEdge
         scopeGraphWithParentEdge = addEdge parentScope classScopeNode P scopeGraphWithClassScope
         finalScopeGraph = addEdge classNode classScopeNode Eq scopeGraphWithParentEdge
-
-        (instanceNode, scopeGraphWithInstanceNode) = addNode (InstanceNode tc (TVar tv)) finalScopeGraph
-        scopeGraphWithInstanceEdge = addEdge parentScope instanceNode I scopeGraphWithInstanceNode
-    in foldl (convertFuncSig classScopeNode) scopeGraphWithInstanceEdge funcSigs
+    in foldl (convertFuncSig classScopeNode) finalScopeGraph funcSigs
 
 convertDecl parentScope scopeGraph (InstanceDecl tc t funcDefs) =
     let (instanceNode, scopeGraphWithInstanceNode) = addNode (InstanceNode tc t) scopeGraph
@@ -78,11 +75,7 @@ convertExpr parentScope parentType scopeGraph (EApp func arg) =
 
 convertExpr parentScope parentType scopeGraph (ELam (name, _) body) =
     let (pType, bType) = case parentType of
-            TFun pt1 bt1 -> (pt1, bt1)
-            TConstraint _ _ bt ->
-                case bt of
-                    TFun pt2 bt2 -> (pt2, bt2)
-                    _ -> error "Parent type must be a function type"
+            TFun pt bt -> (pt, bt)
             _ -> error "Parent type must be a function type"
         (lambdaScopeNode, scopeGraphWithLambdaScope) = addNode (ScopeNode (name ++ "'s Lambda Scope")) scopeGraph
         scopeGraphWithParentEdge = addEdge parentScope lambdaScopeNode P scopeGraphWithLambdaScope

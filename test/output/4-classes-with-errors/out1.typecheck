@@ -1,0 +1,3 @@
+Type mismatch of lambda x : Int -> x + 1: Expected (Int -> Bool), but got (Int -> Int)
+
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]

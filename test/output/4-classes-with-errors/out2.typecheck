@@ -1,0 +1,4 @@
+No instance found for A with type Bool
+
+[== --U--> y's Lambda Scope,y's Lambda Scope --P--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --TC--> A: TCLASS(a),A: TCLASS(a) --Eq--> Class Scope,Class Scope --D--> ==: (a -> (a -> Bool))]
+[x --U--> y's Lambda Scope,y's Lambda Scope --P--> x's Lambda Scope,x's Lambda Scope --D--> x: Bool]

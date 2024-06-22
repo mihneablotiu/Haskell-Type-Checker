@@ -5,5 +5,5 @@ instance A Bool where
     (==) :: Bool -> Bool -> Bool
     (==) x y = True
 
-testFunc :: (A a) => a -> a -> Bool
-testFunc x y = (==) x y
+testFunc :: Int -> Int -> Bool
+testFunc x y = (==) True False

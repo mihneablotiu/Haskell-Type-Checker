@@ -1,39 +1,38 @@
 graph {
-    20 [label=f
+    19 [label=True
        ,shape=box
        ,style=dashed];
-    19 [label="g: (Bool -> (Bool -> Bool))"
-       ,shape=box];
-    18 [label="Instance Scope"
-       ,shape=ellipse];
-    17 [label="Bool: INST(B)"
-       ,shape=box];
-    16 [label="g: (b -> (b -> Bool))"
-       ,shape=box];
-    15 [label="b: INST(B)"
-       ,shape=box];
-    14 [label="Class Scope"
-       ,shape=ellipse];
-    13 [label="B: TCLASS(b)"
-       ,shape=box];
-    12 [label=True
+    18 [label=f
        ,shape=box
        ,style=dashed];
-    11 [label="y: Bool",shape=box];
-    10 [label="y's Lambda Scope"
+    17 [label="g: (Bool -> Bool)"
+       ,shape=box];
+    16 [label="Instance Scope"
        ,shape=ellipse];
-    9 [label="x: Bool",shape=box];
-    8 [label="x's Lambda Scope"
+    15 [label="Bool: INST(B)"
+       ,shape=box];
+    14 [label="g: (b -> Bool)"
+       ,shape=box];
+    13 [label="Class Scope"
+       ,shape=ellipse];
+    12 [label="B: TCLASS(b)"
+       ,shape=box];
+    11 [label=True
+       ,shape=box
+       ,style=dashed];
+    10 [label="y: Bool",shape=box];
+    9 [label="y's Lambda Scope"
       ,shape=ellipse];
-    7 [label="f: (Bool -> (Bool -> Bool))"
-      ,shape=box];
-    6 [label="Instance Scope"
+    8 [label="x: Bool",shape=box];
+    7 [label="x's Lambda Scope"
       ,shape=ellipse];
-    5 [label="Bool: INST(A)"
+    6 [label="f: (Bool -> (Bool -> Bool))"
       ,shape=box];
-    4 [label="f: (a -> (a -> Bool))"
+    5 [label="Instance Scope"
+      ,shape=ellipse];
+    4 [label="Bool: INST(A)"
       ,shape=box];
-    3 [label="a: INST(A)"
+    3 [label="f: (a -> (a -> Bool))"
       ,shape=box];
     2 [label="Class Scope"
       ,shape=ellipse];
@@ -41,56 +40,51 @@ graph {
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    18 -- 20 [label=U,dir=back];
-    18 -- 19 [label=D
+    16 -- 19 [label=U,dir=back];
+    16 -- 18 [label=U,dir=back];
+    16 -- 17 [label=D
              ,dir=forward
              ,arrowhead=dot];
-    17 -- 18 [label=Eq
+    15 -- 16 [label=Eq
              ,dir=both
              ,arrowhead=dot
              ,arrowtail=dot];
-    0 -- 18 [label=P,dir=back];
-    0 -- 17 [label=I
-            ,dir=forward
-            ,arrowhead=dot];
-    14 -- 16 [label=D
-             ,dir=forward
-             ,arrowhead=dot];
+    0 -- 16 [label=P,dir=back];
     0 -- 15 [label=I
             ,dir=forward
             ,arrowhead=dot];
-    13 -- 14 [label=Eq
+    13 -- 14 [label=D
+             ,dir=forward
+             ,arrowhead=dot];
+    12 -- 13 [label=Eq
              ,dir=both
              ,arrowhead=dot
              ,arrowtail=dot];
-    0 -- 14 [label=P,dir=back];
-    0 -- 13 [label=TC
+    0 -- 13 [label=P,dir=back];
+    0 -- 12 [label=TC
             ,dir=forward
             ,arrowhead=dot];
-    10 -- 12 [label=U,dir=back];
-    10 -- 11 [label=D
-             ,dir=forward
-             ,arrowhead=dot];
-    8 -- 10 [label=P,dir=back];
-    8 -- 9 [label=D
+    9 -- 11 [label=U,dir=back];
+    9 -- 10 [label=D
+            ,dir=forward
+            ,arrowhead=dot];
+    7 -- 9 [label=P,dir=back];
+    7 -- 8 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    6 -- 8 [label=P,dir=back];
-    6 -- 7 [label=D
+    5 -- 7 [label=P,dir=back];
+    5 -- 6 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    5 -- 6 [label=Eq
+    4 -- 5 [label=Eq
            ,dir=both
            ,arrowhead=dot
            ,arrowtail=dot];
-    0 -- 6 [label=P,dir=back];
-    0 -- 5 [label=I
+    0 -- 5 [label=P,dir=back];
+    0 -- 4 [label=I
            ,dir=forward
            ,arrowhead=dot];
-    2 -- 4 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
-    0 -- 3 [label=I
+    2 -- 3 [label=D
            ,dir=forward
            ,arrowhead=dot];
     1 -- 2 [label=Eq

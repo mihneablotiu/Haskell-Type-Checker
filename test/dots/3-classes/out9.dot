@@ -1,0 +1,101 @@
+graph {
+    21 [label=x
+       ,shape=box
+       ,style=dashed];
+    20 [label=f1
+       ,shape=box
+       ,style=dashed];
+    19 [label=f1
+       ,shape=box
+       ,style=dashed];
+    18 [label="x: Int",shape=box];
+    17 [label="x's Lambda Scope"
+       ,shape=ellipse];
+    16 [label="testTwoFuncs: (Int -> Bool)"
+       ,shape=box];
+    15 [label=False
+       ,shape=box
+       ,style=dashed];
+    14 [label="x: Bool",shape=box];
+    13 [label="x's Lambda Scope"
+       ,shape=ellipse];
+    12 [label="f1: (Bool -> Bool)"
+       ,shape=box];
+    11 [label="Instance Scope"
+       ,shape=ellipse];
+    10 [label="Bool: INST(A)"
+       ,shape=box];
+    9 [label=True
+      ,shape=box
+      ,style=dashed];
+    8 [label="x: Int",shape=box];
+    7 [label="x's Lambda Scope"
+      ,shape=ellipse];
+    6 [label="f1: (Int -> Bool)"
+      ,shape=box];
+    5 [label="Instance Scope"
+      ,shape=ellipse];
+    4 [label="Int: INST(A)"
+      ,shape=box];
+    3 [label="f1: (a -> Bool)"
+      ,shape=box];
+    2 [label="Class Scope"
+      ,shape=ellipse];
+    1 [label="A: TCLASS(a)"
+      ,shape=box];
+    0 [label="Global Scope"
+      ,shape=ellipse];
+    17 -- 21 [label=U,dir=back];
+    17 -- 20 [label=U,dir=back];
+    17 -- 19 [label=U,dir=back];
+    17 -- 18 [label=D
+             ,dir=forward
+             ,arrowhead=dot];
+    0 -- 17 [label=P,dir=back];
+    0 -- 16 [label=D
+            ,dir=forward
+            ,arrowhead=dot];
+    13 -- 15 [label=U,dir=back];
+    13 -- 14 [label=D
+             ,dir=forward
+             ,arrowhead=dot];
+    11 -- 13 [label=P,dir=back];
+    11 -- 12 [label=D
+             ,dir=forward
+             ,arrowhead=dot];
+    10 -- 11 [label=Eq
+             ,dir=both
+             ,arrowhead=dot
+             ,arrowtail=dot];
+    0 -- 11 [label=P,dir=back];
+    0 -- 10 [label=I
+            ,dir=forward
+            ,arrowhead=dot];
+    7 -- 9 [label=U,dir=back];
+    7 -- 8 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    5 -- 7 [label=P,dir=back];
+    5 -- 6 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    4 -- 5 [label=Eq
+           ,dir=both
+           ,arrowhead=dot
+           ,arrowtail=dot];
+    0 -- 5 [label=P,dir=back];
+    0 -- 4 [label=I
+           ,dir=forward
+           ,arrowhead=dot];
+    2 -- 3 [label=D
+           ,dir=forward
+           ,arrowhead=dot];
+    1 -- 2 [label=Eq
+           ,dir=both
+           ,arrowhead=dot
+           ,arrowtail=dot];
+    0 -- 2 [label=P,dir=back];
+    0 -- 1 [label=TC
+           ,dir=forward
+           ,arrowhead=dot];
+}

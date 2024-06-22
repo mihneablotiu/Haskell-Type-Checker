@@ -1,3 +1,3 @@
-Type mismatch of 7: Expected Bool, but got Int
+Unexpected error: Test
 
 [boolToInt --U--> Global Scope,Global Scope --D--> boolToInt: (Bool -> Int)]

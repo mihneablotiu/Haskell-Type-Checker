@@ -66,15 +66,9 @@ typeCheckExpr scopeGraph wantedType expr searchState =
     let (foundTypeResult, foundPaths, newState) = findType scopeGraph expr searchState
     in case foundTypeResult of
         Right foundType ->
-            case wantedType of
-              TConstraint _ _ body ->
-                if body == foundType
-                then ([], foundPaths, newState)
-                else ([Mismatch (show expr) wantedType foundType], foundPaths, newState)
-              _ -> 
-                if foundType == wantedType
-                then ([], foundPaths, newState)
-                else ([Mismatch (show expr) wantedType foundType], foundPaths, newState)
+          if foundType == wantedType
+          then ([], foundPaths, newState)
+          else ([Mismatch (show expr) wantedType foundType], foundPaths, newState)
         Left err -> ([err], foundPaths, newState)
 
 findType :: ScopeGraph -> Expr -> SearchState -> (Either TypeError Type, [Path], SearchState)
@@ -120,10 +114,10 @@ findType scopeGraph (EApp func arg) searchState =
                             initialNode = fromNode $ head $ last funcPaths
                         in case checkInstanceOccurence initialNode scopeGraph (InstanceUsage classNode argType) of
                             Right path -> (Right (substituteTypeVars outputType (extractActualTypeFromInstance (toNode (last path)))), funcPaths ++ argPaths ++ [path], argState)
-                            Left _ -> (Left (InstanceNotFound (TypeClass (show argType)) argType), funcPaths ++ argPaths, argState)
+                            Left _ -> (Left (InstanceNotFound (TypeClass (show classNode)) argType), funcPaths ++ argPaths, argState)
                        else if inputType == argType
                             then (Right outputType, funcPaths ++ argPaths, argState)
-                            else (Left (Mismatch (show arg) inputType argType), funcPaths ++ argPaths, argState)
+                            else (Left (UnexpectedError "Test"), funcPaths ++ argPaths, argState)
                 Left err -> (Left err, funcPaths ++ argPaths, argState)
         Right funcType -> (Left (UnexpectedError ("Expected function type, got " ++ show funcType)), funcPaths, funcState)
         Left err -> (Left err, funcPaths, funcState)
@@ -131,7 +125,6 @@ findType scopeGraph (EApp func arg) searchState =
 substituteTypeVars :: Type -> Type -> Type
 substituteTypeVars (TVar _) actual = actual
 substituteTypeVars (TFun from to) actual = TFun (substituteTypeVars from actual) (substituteTypeVars to actual)
-substituteTypeVars (TConstraint tc constrainedVar body) actual = TConstraint tc constrainedVar (substituteTypeVars body actual)
 substituteTypeVars t _ = t
 
 checkInstanceOccurence :: Node -> ScopeGraph -> SearchPattern -> Either TypeError Path

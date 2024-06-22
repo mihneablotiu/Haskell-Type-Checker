@@ -1,0 +1,7 @@
+Arithmetic error: Expected Int, but got Bool and Bool
+
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Bool]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Bool]
+[y --U--> y's Lambda Scope,y's Lambda Scope --D--> y: Int]
+[increment --U--> Global Scope,Global Scope --D--> increment: (Int -> Int)]
+[double --U--> Global Scope,Global Scope --D--> double: (Bool -> Int)]

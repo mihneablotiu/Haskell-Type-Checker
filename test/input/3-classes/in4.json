@@ -1,8 +1,12 @@
 [
     {
         "tag": "ClassDecl",
-        "declTypeClass": { "getTypeClass": "A" },
-        "declTypeVar": { "getTypeVar": "a" },
+        "declTypeClass": {
+            "getTypeClass": "A"
+        },
+        "declTypeVar": {
+            "getTypeVar": "a"
+        },
         "declFuncSigs": [
             {
                 "funcSigName": "f",
@@ -10,13 +14,17 @@
                     "tag": "TFun",
                     "fromType": {
                         "tag": "TVar",
-                        "typeVar": { "getTypeVar": "a" }
+                        "typeVar": {
+                            "getTypeVar": "a"
+                        }
                     },
                     "toType": {
                         "tag": "TFun",
                         "fromType": {
                             "tag": "TVar",
-                            "typeVar": { "getTypeVar": "a" }
+                            "typeVar": {
+                                "getTypeVar": "a"
+                            }
                         },
                         "toType": {
                             "tag": "TBool"
@@ -28,7 +36,9 @@
     },
     {
         "tag": "InstanceDecl",
-        "declTypeClass": { "getTypeClass": "A" },
+        "declTypeClass": {
+            "getTypeClass": "A"
+        },
         "declType": {
             "tag": "TBool"
         },
@@ -37,19 +47,35 @@
                 "funcDefName": "f",
                 "funcDefType": {
                     "tag": "TFun",
-                    "fromType": { "tag": "TBool" },
+                    "fromType": {
+                        "tag": "TBool"
+                    },
                     "toType": {
                         "tag": "TFun",
-                        "fromType": { "tag": "TBool" },
-                        "toType": { "tag": "TBool" }
+                        "fromType": {
+                            "tag": "TBool"
+                        },
+                        "toType": {
+                            "tag": "TBool"
+                        }
                     }
                 },
                 "funcDefBody": {
                     "tag": "ELam",
-                    "lamArg": ["x", { "tag": "TBool" }],
+                    "lamArg": [
+                        "x",
+                        {
+                            "tag": "TBool"
+                        }
+                    ],
                     "lamBody": {
                         "tag": "ELam",
-                        "lamArg": ["y", { "tag": "TBool" }],
+                        "lamArg": [
+                            "y",
+                            {
+                                "tag": "TBool"
+                            }
+                        ],
                         "lamBody": {
                             "tag": "EBool",
                             "boolValue": true
@@ -61,8 +87,12 @@
     },
     {
         "tag": "ClassDecl",
-        "declTypeClass": { "getTypeClass": "B" },
-        "declTypeVar": { "getTypeVar": "b" },
+        "declTypeClass": {
+            "getTypeClass": "B"
+        },
+        "declTypeVar": {
+            "getTypeVar": "b"
+        },
         "declFuncSigs": [
             {
                 "funcSigName": "g",
@@ -70,17 +100,12 @@
                     "tag": "TFun",
                     "fromType": {
                         "tag": "TVar",
-                        "typeVar": { "getTypeVar": "b" }
+                        "typeVar": {
+                            "getTypeVar": "b"
+                        }
                     },
                     "toType": {
-                        "tag": "TFun",
-                        "fromType": {
-                            "tag": "TVar",
-                            "typeVar": { "getTypeVar": "b" }
-                        },
-                        "toType": {
-                            "tag": "TBool"
-                        }
+                        "tag": "TBool"
                     }
                 }
             }
@@ -88,7 +113,9 @@
     },
     {
         "tag": "InstanceDecl",
-        "declTypeClass": { "getTypeClass": "B" },
+        "declTypeClass": {
+            "getTypeClass": "B"
+        },
         "declType": {
             "tag": "TBool"
         },
@@ -97,16 +124,23 @@
                 "funcDefName": "g",
                 "funcDefType": {
                     "tag": "TFun",
-                    "fromType": { "tag": "TBool" },
+                    "fromType": {
+                        "tag": "TBool"
+                    },
                     "toType": {
-                        "tag": "TFun",
-                        "fromType": { "tag": "TBool" },
-                        "toType": { "tag": "TBool" }
+                        "tag": "TBool"
                     }
                 },
                 "funcDefBody": {
-                    "tag": "EVar",
-                    "varName": "f"
+                    "tag": "EApp",
+                    "appFunc": {
+                        "tag": "EVar",
+                        "varName": "f"
+                    },
+                    "appArg": {
+                        "tag": "EBool",
+                        "boolValue": true
+                    }
                 }
             }
         ]

@@ -1,4 +1,4 @@
-Type mismatch of True: Expected Int, but got Bool
+Unexpected error: Test
 
 [x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
 [x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]

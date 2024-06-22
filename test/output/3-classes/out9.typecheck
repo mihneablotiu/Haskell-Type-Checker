@@ -1,0 +1,6 @@
+No errors found
+[f1 --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --TC--> A: TCLASS(a),A: TCLASS(a) --Eq--> Class Scope,Class Scope --D--> f1: (a -> Bool)]
+[f1 --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --TC--> A: TCLASS(a),A: TCLASS(a) --Eq--> Class Scope,Class Scope --D--> f1: (a -> Bool)]
+[x --U--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
+[f1 --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --I--> Int: INST(A)]
+[f1 --U--> x's Lambda Scope,x's Lambda Scope --P--> Global Scope,Global Scope --I--> Bool: INST(A)]

@@ -1,22 +1,20 @@
 graph {
-    11 [label=1
+    10 [label=1
        ,shape=box
        ,style=dashed];
-    10 [label=x
-       ,shape=box
-       ,style=dashed];
-    9 [label="x: Int",shape=box];
-    8 [label="x's Lambda Scope"
+    9 [label=x
+      ,shape=box
+      ,style=dashed];
+    8 [label="x: Int",shape=box];
+    7 [label="x's Lambda Scope"
       ,shape=ellipse];
-    7 [label="g: (Int -> Int)"
+    6 [label="g: (Int -> Int)"
       ,shape=box];
-    6 [label="Instance Scope"
+    5 [label="Instance Scope"
       ,shape=ellipse];
-    5 [label="Int: INST(B)"
+    4 [label="Int: INST(B)"
       ,shape=box];
-    4 [label="g: (b -> b)"
-      ,shape=box];
-    3 [label="b: INST(B)"
+    3 [label="g: (b -> b)"
       ,shape=box];
     2 [label="Class Scope"
       ,shape=ellipse];
@@ -24,27 +22,24 @@ graph {
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    8 -- 11 [label=U,dir=back];
-    8 -- 10 [label=U,dir=back];
-    8 -- 9 [label=D
+    7 -- 10 [label=U,dir=back];
+    7 -- 9 [label=U,dir=back];
+    7 -- 8 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    6 -- 8 [label=P,dir=back];
-    6 -- 7 [label=D
+    5 -- 7 [label=P,dir=back];
+    5 -- 6 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    5 -- 6 [label=Eq
+    4 -- 5 [label=Eq
            ,dir=both
            ,arrowhead=dot
            ,arrowtail=dot];
-    0 -- 6 [label=P,dir=back];
-    0 -- 5 [label=I
+    0 -- 5 [label=P,dir=back];
+    0 -- 4 [label=I
            ,dir=forward
            ,arrowhead=dot];
-    2 -- 4 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
-    0 -- 3 [label=I
+    2 -- 3 [label=D
            ,dir=forward
            ,arrowhead=dot];
     1 -- 2 [label=Eq

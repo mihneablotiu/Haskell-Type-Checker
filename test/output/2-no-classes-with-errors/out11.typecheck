@@ -1,0 +1,4 @@
+Type mismatch of lambda x : Int -> True: Expected (Int -> Int), but got (Int -> Bool)
+Type mismatch of lambda x : Bool -> 1: Expected (Bool -> Bool), but got (Bool -> Int)
+
+No valid paths found

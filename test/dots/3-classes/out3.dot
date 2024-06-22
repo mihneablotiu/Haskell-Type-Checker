@@ -1,19 +1,17 @@
 graph {
-    14 [label=2
+    13 [label=2
        ,shape=box
        ,style=dashed];
-    13 [label=double
+    12 [label=double
        ,shape=box
        ,style=dashed];
-    12 [label="twoSquared: Int"
+    11 [label="twoSquared: Int"
        ,shape=box];
-    11 [label="Instance Scope"
+    10 [label="Instance Scope"
        ,shape=ellipse];
-    10 [label="Int: INST(Constants)"
-       ,shape=box];
-    9 [label="twoSquared: a"
+    9 [label="Int: INST(Constants)"
       ,shape=box];
-    8 [label="a: INST(Constants)"
+    8 [label="twoSquared: a"
       ,shape=box];
     7 [label="Class Scope"
       ,shape=ellipse];
@@ -32,23 +30,20 @@ graph {
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    11 -- 14 [label=U,dir=back];
-    11 -- 13 [label=U,dir=back];
-    11 -- 12 [label=D
+    10 -- 13 [label=U,dir=back];
+    10 -- 12 [label=U,dir=back];
+    10 -- 11 [label=D
              ,dir=forward
              ,arrowhead=dot];
-    10 -- 11 [label=Eq
-             ,dir=both
-             ,arrowhead=dot
-             ,arrowtail=dot];
-    0 -- 11 [label=P,dir=back];
-    0 -- 10 [label=I
-            ,dir=forward
-            ,arrowhead=dot];
-    7 -- 9 [label=D
+    9 -- 10 [label=Eq
+            ,dir=both
+            ,arrowhead=dot
+            ,arrowtail=dot];
+    0 -- 10 [label=P,dir=back];
+    0 -- 9 [label=I
            ,dir=forward
            ,arrowhead=dot];
-    0 -- 8 [label=I
+    7 -- 8 [label=D
            ,dir=forward
            ,arrowhead=dot];
     6 -- 7 [label=Eq
