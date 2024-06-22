@@ -1,47 +1,32 @@
 graph {
-    10 [label=7
-       ,shape=box
-       ,style=dashed];
-    9 [label=boolToInt
+    7 [label=7
       ,shape=box
       ,style=dashed];
-    8 [label="result: Int"
+    6 [label=boolToInt
+      ,shape=box
+      ,style=dashed];
+    5 [label="result: Int"
       ,shape=box];
-    7 [label=1
+    4 [label=1
       ,shape=box
       ,style=dashed];
-    6 [label="x: Bool",shape=box];
-    5 [label="x's Lambda Scope"
+    3 [label="x: Bool",shape=box];
+    2 [label="x's Lambda Scope"
       ,shape=ellipse];
-    4 [label="boolToInt: (Bool -> Int)"
-      ,shape=box];
-    3 [label="Number: Int"
-      ,shape=box];
-    2 [label="False: Bool"
-      ,shape=box];
-    1 [label="True: Bool"
+    1 [label="boolToInt: (Bool -> Int)"
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    0 -- 10 [label=U,dir=back];
-    0 -- 9 [label=U,dir=back];
-    0 -- 8 [label=D
+    0 -- 7 [label=U,dir=back];
+    0 -- 6 [label=U,dir=back];
+    0 -- 5 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    5 -- 7 [label=U,dir=back];
-    5 -- 6 [label=D
+    2 -- 4 [label=U,dir=back];
+    2 -- 3 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    0 -- 5 [label=P,dir=back];
-    0 -- 4 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
-    0 -- 3 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
-    0 -- 2 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
+    0 -- 2 [label=P,dir=back];
     0 -- 1 [label=D
            ,dir=forward
            ,arrowhead=dot];

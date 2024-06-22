@@ -75,3 +75,15 @@ getUsageNodeFromName name sg searchCounts =
 getTypeFromNode :: Node -> Type
 getTypeFromNode (Node _ (DeclNode _ t)) = t
 getTypeFromNode _ = error "Node does not have a type"
+
+getTypeClassFromNode :: Node -> TypeClass
+getTypeClassFromNode (Node _ (TypeClassNode tc _)) = tc
+getTypeClassFromNode _ = error "Node does not have a type class"
+
+extractClassFromInstance :: Node -> TypeClass
+extractClassFromInstance (Node _ (InstanceNode tc _)) = tc
+extractClassFromInstance _ = error "Node is not an instance"
+
+extractActualTypeFromInstance :: Node -> Type
+extractActualTypeFromInstance (Node _ (InstanceNode _ t)) = t
+extractActualTypeFromInstance _ = error "Node is not an instance"

@@ -41,18 +41,23 @@ runTypeCheckDecls decls scopeGraph searchState =
     ([], [], searchState)
     decls
 
+runTypeCheckFuncDefs :: [FuncDef] -> ScopeGraph -> SearchState -> ([TypeError], [Path], SearchState)
+runTypeCheckFuncDefs funcDefs scopeGraph searchState =
+  foldl
+    (\(accErrors, accPaths, accState) (FuncDef _ declaredType body) ->
+      let (funcErrors, funcPaths, newState) = typeCheckExpr scopeGraph declaredType body accState
+      in (accErrors ++ funcErrors, accPaths ++ funcPaths, newState)
+    )
+    ([], [], searchState)
+    funcDefs
+
 typeCheckDecl :: ScopeGraph -> Decl -> SearchState -> ([TypeError], [Path], SearchState)
 typeCheckDecl scopeGraph (ValueDecl _ declaredType body) searchState =
   typeCheckExpr scopeGraph declaredType body searchState
 typeCheckDecl scopeGraph (FuncDecl _ declaredType body) searchState =
   typeCheckExpr scopeGraph declaredType body searchState
 typeCheckDecl scopeGraph (InstanceDecl _ _ funcDefs) searchState =
-  foldl (\(accErrors, accPaths, accState) (FuncDef _ declaredType body) ->
-           let (funcErrors, funcPaths, newState) = typeCheckExpr scopeGraph declaredType body accState
-            in (accErrors ++ funcErrors, accPaths ++ funcPaths, newState)
-        )
-        ([], [], searchState)
-        funcDefs
+  runTypeCheckFuncDefs funcDefs scopeGraph searchState
 typeCheckDecl _ _ searchState = ([], [], searchState)
 
 
@@ -61,26 +66,26 @@ typeCheckExpr scopeGraph wantedType expr searchState =
     let (foundTypeResult, foundPaths, newState) = findType scopeGraph expr searchState
     in case foundTypeResult of
         Right foundType ->
-            if foundType == wantedType
-            then ([], foundPaths, newState)
-            else ([Mismatch (show expr) wantedType foundType], foundPaths, newState)
+            case wantedType of
+              TConstraint _ _ body ->
+                if body == foundType
+                then ([], foundPaths, newState)
+                else ([Mismatch (show expr) wantedType foundType], foundPaths, newState)
+              _ -> 
+                if foundType == wantedType
+                then ([], foundPaths, newState)
+                else ([Mismatch (show expr) wantedType foundType], foundPaths, newState)
         Left err -> ([err], foundPaths, newState)
 
 findType :: ScopeGraph -> Expr -> SearchState -> (Either TypeError Type, [Path], SearchState)
-findType scopeGraph (ENum value) searchState =
-    let (numResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState ValUsage
-    in case numResult of
-        Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
-        Left err -> (Left err, [], newState)
+findType _ (ENum _) searchState =
+  (Right TNum, [], searchState)
 
-findType scopeGraph (EBool value) searchState =
-    let (boolResult, newState) = checkGraphOccurrence scopeGraph (show value) searchState ValUsage
-    in case boolResult of
-        Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
-        Left err -> (Left err, [], newState)
+findType _ (EBool _) searchState =
+  (Right TBool, [], searchState)
 
 findType scopeGraph (EVar name) searchState =
-    let (varResult, newState) = checkGraphOccurrence scopeGraph name searchState FuncCall
+    let (varResult, newState) = checkGraphOccurrence scopeGraph name searchState Reference
     in case varResult of
         Right path -> (Right (getTypeFromNode (toNode $ last path)), [path], newState)
         Left err -> (Left err, [], newState)
@@ -90,14 +95,14 @@ findType scopeGraph (EAdd left right) searchState =
         (rightResult, rightPaths, rightState) = findType scopeGraph right leftState
     in case (leftResult, rightResult) of
         (Right TNum, Right TNum) -> (Right TNum, leftPaths ++ rightPaths, rightState)
-        (Right _, Right _) -> (Left (UnexpectedError "Addition of non-numeric types"), leftPaths ++ rightPaths, rightState)
+        (Right le, Right re) -> (Left (ArithmeticError TNum le re), leftPaths ++ rightPaths, rightState)
         (Left le, _) -> (Left le, leftPaths ++ rightPaths, leftState)
         (_, Left re) -> (Left re, leftPaths ++ rightPaths, rightState)
 
 findType scopeGraph (ELam (_, argType) body) searchState =
     let (bodyResult, bodyPaths, bodyState) = findType scopeGraph body searchState
     in case bodyResult of
-        Right bodyType -> (Right (TFun argType bodyType), bodyPaths, bodyState)
+        Right bType -> (Right (TFun argType bType), bodyPaths, bodyState)
         Left err -> (Left err, bodyPaths, bodyState)
 
 findType scopeGraph (EApp func arg) searchState =
@@ -105,14 +110,35 @@ findType scopeGraph (EApp func arg) searchState =
         (argResult, argPaths, argState) = findType scopeGraph arg funcState
     in case funcResult of
         Right (TFun inputType outputType) ->
-            case argResult of
+          case argResult of
                 Right argType ->
-                    if inputType == argType
-                    then (Right outputType, funcPaths ++ argPaths, argState)
-                    else (Left (Mismatch (show arg) inputType argType), funcPaths ++ argPaths, argState)
+                    let tcEdges = filter (\(PathComponent _ et _) -> et == TC) (last funcPaths)
+                        funcResolvedInClass = not (null tcEdges)
+                    in if funcResolvedInClass
+                       then
+                        let classNode = getTypeClassFromNode $ toNode (head tcEdges)
+                            initialNode = fromNode $ head $ last funcPaths
+                        in case checkInstanceOccurence initialNode scopeGraph (InstanceUsage classNode argType) of
+                            Right path -> (Right (substituteTypeVars outputType (extractActualTypeFromInstance (toNode (last path)))), funcPaths ++ argPaths ++ [path], argState)
+                            Left _ -> (Left (InstanceNotFound (TypeClass (show argType)) argType), funcPaths ++ argPaths, argState)
+                       else if inputType == argType
+                            then (Right outputType, funcPaths ++ argPaths, argState)
+                            else (Left (Mismatch (show arg) inputType argType), funcPaths ++ argPaths, argState)
                 Left err -> (Left err, funcPaths ++ argPaths, argState)
         Right funcType -> (Left (UnexpectedError ("Expected function type, got " ++ show funcType)), funcPaths, funcState)
         Left err -> (Left err, funcPaths, funcState)
+
+substituteTypeVars :: Type -> Type -> Type
+substituteTypeVars (TVar _) actual = actual
+substituteTypeVars (TFun from to) actual = TFun (substituteTypeVars from actual) (substituteTypeVars to actual)
+substituteTypeVars (TConstraint tc constrainedVar body) actual = TConstraint tc constrainedVar (substituteTypeVars body actual)
+substituteTypeVars t _ = t
+
+checkInstanceOccurence :: Node -> ScopeGraph -> SearchPattern -> Either TypeError Path
+checkInstanceOccurence node scopeGraph searchPattern =
+  case findValidPath node scopeGraph searchPattern of
+    Right (t, _) -> Right t
+    Left e -> Left e
 
 checkGraphOccurrence :: ScopeGraph -> String -> SearchState -> SearchPattern -> (Either TypeError Path, SearchState)
 checkGraphOccurrence scopeGraph name searchState searchPattern =
@@ -120,6 +146,6 @@ checkGraphOccurrence scopeGraph name searchState searchPattern =
    in case graphNode of
         Just node ->
           case findValidPath node scopeGraph searchPattern of
-            Right t -> (Right t, updatedCounts)
+            Right (t, _) -> (Right t, updatedCounts)
             Left e -> (Left e, updatedCounts)
         Nothing -> undefined

@@ -1,87 +1,72 @@
 graph {
-    20 [label=5
+    17 [label=5
        ,shape=box
        ,style=dashed];
-    19 [label=increment
+    16 [label=increment
        ,shape=box
        ,style=dashed];
-    18 [label=applyTwice
+    15 [label=applyTwice
        ,shape=box
        ,style=dashed];
-    17 [label="result: Int"
+    14 [label="result: Int"
        ,shape=box];
-    16 [label=1
+    13 [label=1
        ,shape=box
        ,style=dashed];
-    15 [label=x
+    12 [label=x
        ,shape=box
        ,style=dashed];
-    14 [label="x: Int",shape=box];
-    13 [label="x's Lambda Scope"
+    11 [label="x: Int",shape=box];
+    10 [label="x's Lambda Scope"
        ,shape=ellipse];
-    12 [label="increment: (Int -> Int)"
-       ,shape=box];
-    11 [label=x
-       ,shape=box
-       ,style=dashed];
-    10 [label=f
-       ,shape=box
-       ,style=dashed];
-    9 [label=f
+    9 [label="increment: (Int -> Int)"
+      ,shape=box];
+    8 [label=x
       ,shape=box
       ,style=dashed];
-    8 [label="x: Int",shape=box];
-    7 [label="x's Lambda Scope"
+    7 [label=f
+      ,shape=box
+      ,style=dashed];
+    6 [label=f
+      ,shape=box
+      ,style=dashed];
+    5 [label="x: Int",shape=box];
+    4 [label="x's Lambda Scope"
       ,shape=ellipse];
-    6 [label="f: (Int -> Int)"
+    3 [label="f: (Int -> Int)"
       ,shape=box];
-    5 [label="f's Lambda Scope"
+    2 [label="f's Lambda Scope"
       ,shape=ellipse];
-    4 [label="applyTwice: ((Int -> Int) -> (Int -> Int))"
-      ,shape=box];
-    3 [label="Number: Int"
-      ,shape=box];
-    2 [label="False: Bool"
-      ,shape=box];
-    1 [label="True: Bool"
+    1 [label="applyTwice: ((Int -> Int) -> (Int -> Int))"
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    0 -- 20 [label=U,dir=back];
-    0 -- 19 [label=U,dir=back];
-    0 -- 18 [label=U,dir=back];
-    0 -- 17 [label=D
+    0 -- 17 [label=U,dir=back];
+    0 -- 16 [label=U,dir=back];
+    0 -- 15 [label=U,dir=back];
+    0 -- 14 [label=D
             ,dir=forward
             ,arrowhead=dot];
-    13 -- 16 [label=U,dir=back];
-    13 -- 15 [label=U,dir=back];
-    13 -- 14 [label=D
+    10 -- 13 [label=U,dir=back];
+    10 -- 12 [label=U,dir=back];
+    10 -- 11 [label=D
              ,dir=forward
              ,arrowhead=dot];
-    0 -- 13 [label=P,dir=back];
-    0 -- 12 [label=D
-            ,dir=forward
-            ,arrowhead=dot];
-    7 -- 11 [label=U,dir=back];
-    7 -- 10 [label=U,dir=back];
-    7 -- 9 [label=U,dir=back];
-    7 -- 8 [label=D
+    0 -- 10 [label=P,dir=back];
+    0 -- 9 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    5 -- 7 [label=P,dir=back];
-    5 -- 6 [label=D
+    4 -- 8 [label=U,dir=back];
+    4 -- 7 [label=U,dir=back];
+    4 -- 6 [label=U,dir=back];
+    4 -- 5 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    0 -- 5 [label=P,dir=back];
-    0 -- 4 [label=D
+    2 -- 4 [label=P,dir=back];
+    2 -- 3 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    0 -- 3 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
-    0 -- 2 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
+    0 -- 2 [label=P,dir=back];
     0 -- 1 [label=D
            ,dir=forward
            ,arrowhead=dot];

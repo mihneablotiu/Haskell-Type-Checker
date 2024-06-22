@@ -1,75 +1,60 @@
 graph {
-    17 [label=5
+    14 [label=5
        ,shape=box
        ,style=dashed];
-    16 [label=increment
+    13 [label=increment
        ,shape=box
        ,style=dashed];
-    15 [label=double
+    12 [label=double
        ,shape=box
        ,style=dashed];
-    14 [label="result: Int"
+    11 [label="result: Int"
        ,shape=box];
-    13 [label=1
+    10 [label=1
        ,shape=box
        ,style=dashed];
-    12 [label=y
-       ,shape=box
-       ,style=dashed];
-    11 [label="y: Int",shape=box];
-    10 [label="y's Lambda Scope"
-       ,shape=ellipse];
-    9 [label="increment: (Int -> Int)"
-      ,shape=box];
-    8 [label=x
+    9 [label=y
       ,shape=box
       ,style=dashed];
-    7 [label=x
-      ,shape=box
-      ,style=dashed];
-    6 [label="x: Int",shape=box];
-    5 [label="x's Lambda Scope"
+    8 [label="y: Int",shape=box];
+    7 [label="y's Lambda Scope"
       ,shape=ellipse];
-    4 [label="double: (Int -> Int)"
+    6 [label="increment: (Int -> Int)"
       ,shape=box];
-    3 [label="Number: Int"
-      ,shape=box];
-    2 [label="False: Bool"
-      ,shape=box];
-    1 [label="True: Bool"
+    5 [label=x
+      ,shape=box
+      ,style=dashed];
+    4 [label=x
+      ,shape=box
+      ,style=dashed];
+    3 [label="x: Int",shape=box];
+    2 [label="x's Lambda Scope"
+      ,shape=ellipse];
+    1 [label="double: (Int -> Int)"
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    0 -- 17 [label=U,dir=back];
-    0 -- 16 [label=U,dir=back];
-    0 -- 15 [label=U,dir=back];
-    0 -- 14 [label=D
+    0 -- 14 [label=U,dir=back];
+    0 -- 13 [label=U,dir=back];
+    0 -- 12 [label=U,dir=back];
+    0 -- 11 [label=D
             ,dir=forward
             ,arrowhead=dot];
-    10 -- 13 [label=U,dir=back];
-    10 -- 12 [label=U,dir=back];
-    10 -- 11 [label=D
-             ,dir=forward
-             ,arrowhead=dot];
-    0 -- 10 [label=P,dir=back];
-    0 -- 9 [label=D
+    7 -- 10 [label=U,dir=back];
+    7 -- 9 [label=U,dir=back];
+    7 -- 8 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    5 -- 8 [label=U,dir=back];
-    5 -- 7 [label=U,dir=back];
-    5 -- 6 [label=D
+    0 -- 7 [label=P,dir=back];
+    0 -- 6 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    0 -- 5 [label=P,dir=back];
-    0 -- 4 [label=D
+    2 -- 5 [label=U,dir=back];
+    2 -- 4 [label=U,dir=back];
+    2 -- 3 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    0 -- 3 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
-    0 -- 2 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
+    0 -- 2 [label=P,dir=back];
     0 -- 1 [label=D
            ,dir=forward
            ,arrowhead=dot];

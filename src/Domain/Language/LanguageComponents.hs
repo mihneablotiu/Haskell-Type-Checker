@@ -1,32 +1,38 @@
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Domain.Language.LanguageComponents where
 
 import Data.Aeson
 import GHC.Generics (Generic)
 
-newtype TypeClass = TypeClass { getTypeClass :: String } deriving (Show, Eq, Generic)
+newtype TypeClass = TypeClass { getTypeClass :: String } deriving (Eq, Generic)
 instance FromJSON TypeClass
 
-newtype TypeVar = TypeVar { getTypeVar :: String } deriving (Show, Eq, Ord, Generic)
+instance Show TypeClass where
+    show (TypeClass name) = name
+
+newtype TypeVar = TypeVar { getTypeVar :: String } deriving (Eq, Ord, Generic)
 instance FromJSON TypeVar
+
+instance Show TypeVar where
+    show (TypeVar name) = name
 
 data Type
     = TNum
     | TBool
     | TVar { typeVar :: TypeVar }
     | TFun { fromType :: Type, toType :: Type }
-    | TConstraint { typeClass :: TypeClass, constrainedType :: Type }
+    | TConstraint { typeClass :: TypeClass, constrainedType :: TypeVar, bodyType :: Type }
     deriving (Eq, Generic)
 instance FromJSON Type
 
 instance Show Type where
     show TNum = "Int"
     show TBool = "Bool"
-    show (TVar (TypeVar tv)) = tv
-    show (TFun (TConstraint (TypeClass tc) t) to) = "(" ++ tc ++ " " ++ show t ++ " => " ++ show to ++ ")"
+    show (TVar var) = getTypeVar var
     show (TFun from to) = "(" ++ show from ++ " -> " ++ show to ++ ")"
-    show (TConstraint (TypeClass tc) t) = tc ++ " " ++ show t
+    show (TConstraint tc var body) = show tc ++ " " ++ show var ++ " => " ++ show body
 
 data Expr
     = EVar { varName :: String }
@@ -44,7 +50,7 @@ instance Show Expr where
     show (EBool value) = show value
     show (EAdd left right) = show left ++ " + " ++ show right
     show (EApp func arg) = show func ++ " " ++ show arg
-    show (ELam (argName, argType) body) = "\\" ++ argName ++ " : " ++ show argType ++ " -> " ++ show body
+    show (ELam (argName, argType) body) = "lambda " ++ argName ++ " : " ++ show argType ++ " -> " ++ show body
 
 data FuncSig = FuncSig { funcSigName :: String, funcSigType :: Type } deriving (Show, Eq, Generic)
 instance FromJSON FuncSig

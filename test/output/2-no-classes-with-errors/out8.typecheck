@@ -1,5 +1,5 @@
-Unexpected error: Addition of non-numeric types
-Multiple declarations of "add" in scope add
+Arithmetic error: Expected Int, but got Bool and Bool
+Multiple declarations of add in scope add
 
 [x --U--> y's Lambda Scope,y's Lambda Scope --P--> x's Lambda Scope,x's Lambda Scope --D--> x: Int]
 [y --U--> y's Lambda Scope,y's Lambda Scope --D--> y: Int]

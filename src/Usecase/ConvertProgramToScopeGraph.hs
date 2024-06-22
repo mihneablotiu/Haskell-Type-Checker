@@ -6,13 +6,7 @@ import Domain.ScopeGraph.ScopeGraph
 convertProgram :: Program -> ScopeGraph
 convertProgram prog =
     let (globalScope, initialGraph) = addNode (ScopeNode "Global Scope") emptyScopeGraph
-        (trueNode, sg1) = addNode (DeclNode "True" TBool) initialGraph
-        sg2 = addEdge globalScope trueNode D sg1
-        (falseNode, sg3) = addNode (DeclNode "False" TBool) sg2
-        sg4 = addEdge globalScope falseNode D sg3
-        (numNode, sg5) = addNode (DeclNode "Number" TNum) sg4
-        sg6 = addEdge globalScope numNode D sg5
-    in foldl (convertDecl globalScope) sg6 prog
+    in foldl (convertDecl globalScope) initialGraph prog
 
 convertDecl :: Node -> ScopeGraph -> Decl -> ScopeGraph
 convertDecl parentScope scopeGraph (ClassDecl tc tv funcSigs) =
@@ -21,7 +15,10 @@ convertDecl parentScope scopeGraph (ClassDecl tc tv funcSigs) =
         (classScopeNode, scopeGraphWithClassScope) = addNode (ScopeNode "Class Scope") scopeGraphWithClassEdge
         scopeGraphWithParentEdge = addEdge parentScope classScopeNode P scopeGraphWithClassScope
         finalScopeGraph = addEdge classNode classScopeNode Eq scopeGraphWithParentEdge
-    in foldl (convertFuncSig classScopeNode) finalScopeGraph funcSigs
+
+        (instanceNode, scopeGraphWithInstanceNode) = addNode (InstanceNode tc (TVar tv)) finalScopeGraph
+        scopeGraphWithInstanceEdge = addEdge parentScope instanceNode I scopeGraphWithInstanceNode
+    in foldl (convertFuncSig classScopeNode) scopeGraphWithInstanceEdge funcSigs
 
 convertDecl parentScope scopeGraph (InstanceDecl tc t funcDefs) =
     let (instanceNode, scopeGraphWithInstanceNode) = addNode (InstanceNode tc t) scopeGraph
@@ -80,13 +77,15 @@ convertExpr parentScope parentType scopeGraph (EApp func arg) =
     in finalScopeGraph
 
 convertExpr parentScope parentType scopeGraph (ELam (name, _) body) =
-    let (parameterType, bodyType) = case parentType of
-            TFun pt bt -> case pt of 
-                TConstraint _ t -> (t, bt)
-                _ -> (pt , bt)
+    let (pType, bType) = case parentType of
+            TFun pt1 bt1 -> (pt1, bt1)
+            TConstraint _ _ bt ->
+                case bt of
+                    TFun pt2 bt2 -> (pt2, bt2)
+                    _ -> error "Parent type must be a function type"
             _ -> error "Parent type must be a function type"
         (lambdaScopeNode, scopeGraphWithLambdaScope) = addNode (ScopeNode (name ++ "'s Lambda Scope")) scopeGraph
         scopeGraphWithParentEdge = addEdge parentScope lambdaScopeNode P scopeGraphWithLambdaScope
-        (argNode, scopeGraphWithArgNode) = addNode (DeclNode name parameterType) scopeGraphWithParentEdge
+        (argNode, scopeGraphWithArgNode) = addNode (DeclNode name pType) scopeGraphWithParentEdge
         scopeGraphWithArgEdge = addEdge lambdaScopeNode argNode D scopeGraphWithArgNode
-    in convertExpr lambdaScopeNode bodyType scopeGraphWithArgEdge body
+    in convertExpr lambdaScopeNode bType scopeGraphWithArgEdge body

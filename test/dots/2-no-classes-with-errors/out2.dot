@@ -1,51 +1,36 @@
 graph {
-    11 [label=True
-       ,shape=box
-       ,style=dashed];
-    10 [label=addTwo
-       ,shape=box
-       ,style=dashed];
-    9 [label="result: Int"
+    8 [label=True
+      ,shape=box
+      ,style=dashed];
+    7 [label=addTwo
+      ,shape=box
+      ,style=dashed];
+    6 [label="result: Int"
       ,shape=box];
-    8 [label=2
+    5 [label=2
       ,shape=box
       ,style=dashed];
-    7 [label=x
+    4 [label=x
       ,shape=box
       ,style=dashed];
-    6 [label="x: Int",shape=box];
-    5 [label="x's Lambda Scope"
+    3 [label="x: Int",shape=box];
+    2 [label="x's Lambda Scope"
       ,shape=ellipse];
-    4 [label="addTwo: (Int -> Int)"
-      ,shape=box];
-    3 [label="Number: Int"
-      ,shape=box];
-    2 [label="False: Bool"
-      ,shape=box];
-    1 [label="True: Bool"
+    1 [label="addTwo: (Int -> Int)"
       ,shape=box];
     0 [label="Global Scope"
       ,shape=ellipse];
-    0 -- 11 [label=U,dir=back];
-    0 -- 10 [label=U,dir=back];
-    0 -- 9 [label=D
+    0 -- 8 [label=U,dir=back];
+    0 -- 7 [label=U,dir=back];
+    0 -- 6 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    5 -- 8 [label=U,dir=back];
-    5 -- 7 [label=U,dir=back];
-    5 -- 6 [label=D
+    2 -- 5 [label=U,dir=back];
+    2 -- 4 [label=U,dir=back];
+    2 -- 3 [label=D
            ,dir=forward
            ,arrowhead=dot];
-    0 -- 5 [label=P,dir=back];
-    0 -- 4 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
-    0 -- 3 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
-    0 -- 2 [label=D
-           ,dir=forward
-           ,arrowhead=dot];
+    0 -- 2 [label=P,dir=back];
     0 -- 1 [label=D
            ,dir=forward
            ,arrowhead=dot];

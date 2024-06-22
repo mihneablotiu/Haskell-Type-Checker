@@ -1,4 +1,3 @@
-Unexpected error: Addition of non-numeric types
+Arithmetic error: Expected Int, but got Int and Bool
 
-[5 --U--> Global Scope,Global Scope --D--> Number: Int]
-[True --U--> Global Scope,Global Scope --D--> True: Bool]
+No valid paths found
